@@ -64,7 +64,6 @@ RPROMPT="\$RDART %{$fg[red]%}%?%{$reset_color%}"
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-
 # setup keys
 typeset -A key
 key[Home]=${terminfo[khome]}
