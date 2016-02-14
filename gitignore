@@ -1,0 +1,5 @@
+*~
+*.swp
+.ropeproject
+*.pyc
+*.egg-info

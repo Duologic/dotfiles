@@ -1,0 +1,10 @@
+[ui]
+username = Jeroen Op 't Eynde <jeroen@simplistic.be>
+
+[extensions]
+# uncomment these lines to enable some popular extensions
+# (see "hg help extensions" for more info)
+#
+# pager =
+# progress =
+# color =

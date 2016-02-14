@@ -1,0 +1,14 @@
+[user]
+	name = Jeroen Op 't Eynde
+	email = jeroen@vikingco.com
+[credential]
+	helper = cache --timeout=3600
+[core]
+	excludesfile = ~/.gitignore
+	askpass = 
+[push]
+	default = current
+[merge]
+	tool = vimdiff
+[color]
+	ui = true

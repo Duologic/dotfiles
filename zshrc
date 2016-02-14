@@ -3,13 +3,13 @@ stty -ixon
 ttyctl -f
 
 # some zsh variables
-ZDOTDIR=~/.zdotdir
+ZDOTDIR=$HOME/.config/zsh
 LDART=$'\u25ba'
 RDART=$'\u25c0'
 GITUSER=`git config user.name`
 
 # history
-HISTFILE=~/.zdotdir/.histfile
+HISTFILE=$ZDOTDIR/zhst
 HISTSIZE=1000
 SAVEHIST=1000
 setopt HIST_IGNORE_DUPS
@@ -30,10 +30,10 @@ bindkey -v
 bindkey -M vicmd v edit-command-line
 
 # autocomplete and command-not-found hook
-zstyle :compinstall filename '~/.zshrc'
+zstyle :compinstall filename '$HOME/.zshrc'
 zstyle ':completion:*' menu select
 zstyle ':completion:*' rehash true
-[ -r /usr/share/doc/pkgfile/command-not-found.zsh ] && source /usr/share/doc/pkgfile/command-not-found.zsh
+[ -x /usr/share/doc/pkgfile/command-not-found.zsh ] && source /usr/share/doc/pkgfile/command-not-found.zsh
 
 # add virtualenv info to prompt
 function virtualenv_info(){
@@ -135,10 +135,10 @@ alias grmaster="git checkout master; gmerge release; git commit"
 function md2man () { pandoc -s -f markdown -t man $1 | groff -T utf8 -man | less }
 #  Use ncurses for gpg on zsh
 function pass_cmd () {
-    sed -i -e "s/gtk-2/curses/g" ~/.gnupg/gpg-agent.conf
+    sed -i -e "s/gtk-2/curses/g" $HOME/.gnupg/gpg-agent.conf
     echo RELOADAGENT | gpg-connect-agent
     /usr/bin/pass "$@"
-    sed -i -e "s/curses/gtk-2/g" ~/.gnupg/gpg-agent.conf
+    sed -i -e "s/curses/gtk-2/g" $HOME/.gnupg/gpg-agent.conf
     echo RELOADAGENT | gpg-connect-agent
 }
 alias pass='pass_cmd'
@@ -151,9 +151,10 @@ eval $(keychain --nogui --eval --agents ssh -Q --quiet --ignore-missing id_rsa)
 # general exported variables
 export DISPLAY=:0
 export EDITOR=vim
-export LESSHISTFILE=~/.config/less/lesshst
-export PSQLRC=~/.config/psql/psqlrc
-export XDG_CACHE_HOME=~/.cache
+export LESSHISTFILE=$HOME/.config/less/lesshst
+export PSQLRC=$HOME/.config/psql/psqlrc
+export MYSQL_HISTFILE=$HOME/.config/mysql/mysqlhst
+export XDG_CACHE_HOME=$HOME/.cache
 
 # OS specific paths
 export JAVA_HOME=/usr/lib/jvm/default
@@ -164,15 +165,15 @@ export PATH="$HOME/node_modules/.bin:$PATH"
 # virtualenvwrapper
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2.7
-export WORKON_HOME=~/virtualenvs
-[ -r /usr/bin/virtualenvwrapper.sh ] && source /usr/bin/virtualenvwrapper.sh
+export WORKON_HOME=$HOME/virtualenvs
+[ -x /usr/bin/virtualenvwrapper.sh ] && source /usr/bin/virtualenvwrapper.sh
 
 # import extra zsh config
-[ -r $HOME/.zshrc.extra ] && source $HOME/.zshrc.extra
+[ -x $HOME/.zshrc.extra ] && source $HOME/.zshrc.extra
 
 # zsh-syntax-highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[ -x /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # tmux config
 if which tmux 2>&1 >/dev/null; then

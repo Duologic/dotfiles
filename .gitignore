@@ -2,3 +2,9 @@
 vim/viminfo
 vim/backup/*
 vim/swp/*
+
+# Config
+config/x11vnc/passwd
+config/zsh/zhst
+config/less/lesshst
+config/less/mysqlhst
