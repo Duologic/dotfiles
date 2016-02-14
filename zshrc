@@ -35,20 +35,35 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' rehash true
 [ -r /usr/share/doc/pkgfile/command-not-found.zsh ] && source /usr/share/doc/pkgfile/command-not-found.zsh
 
-# add vcs information to prompt
+# add virtualenv info to prompt
 function virtualenv_info(){
     venv=''
     [[ -n "$VIRTUAL_ENV" ]] && venv="${VIRTUAL_ENV##*/}"
-    [[ -n "$venv" ]] && echo "$venv"
+    [[ -n "$venv" ]] && echo "$venv $LDART "
 }
-local VENV="$(virtualenv_info)";
+
+# add vcs information to prompt
 zstyle ':vcs_info:git*' check-for-changes true
-zstyle ':vcs_info:git*' formats " $LDART %{$fg[cyan]%}%s:%{$fg[blue]%}%r/%b %m%u%c"
+zstyle ':vcs_info:git*' formats " $LDART %{$fg[cyan]%}%s:%{$fg[blue]%}%r/%b %m%u%c "
+
+# add vi-mode to prompt
+VI_MODE="%{$fg[green]%}INSERT%{$reset_color%}"
+function zle-line-init zle-keymap-select {
+    case ${KEYMAP} in
+      (vicmd)      VI_MODE="%{$fg[magenta]%}COMMND%{$reset_color%}" ;;
+      (main|viins) VI_MODE="%{$fg[green]%}INSERT%{$reset_color%}" ;;
+      (*)          VI_MODE="%{$fg[green]%}INSERT%{$reset_color%}" ;;
+    esac
+    zle reset-prompt
+}
 
 # setup prompt
 PROMPT="%{$fg[red]%}%n%{$reset_color%}@%{$fg[cyan]%}%m:%{$fg[blue]%}%3d\$vcs_info_msg_0_
- %{$fg[blue]%}\$(virtualenv_info)%{$reset_color%} \$LDART "
+%{$fg[blue]%}\$(virtualenv_info)%{$reset_color%}\$VI_MODE \$LDART "
 RPROMPT="\$RDART %{$fg[red]%}%?%{$reset_color%}"
+zle -N zle-line-init
+zle -N zle-keymap-select
+
 
 # setup keys
 typeset -A key
