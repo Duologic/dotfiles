@@ -11,6 +11,8 @@ LDART=$'\ue0b0'
 RDART=$'\ue0b2'
 BRNCH=$'\ue0a0'
 ENVIR=$'\u24d4'
+DIRIC=$'\u27b2'
+SMILY=$'\u2620'
 
 # history
 HISTFILE=$ZDOTDIR/zhst
@@ -62,7 +64,7 @@ function zle-line-init zle-keymap-select {
 }
 
 # setup prompt
-PROMPT="\$VI_MODE%F{220} %m %F{166}%K{31}\$LDART%F{231}%B %n %b%F{31}%K{240}\$LDART%F{252}%B %3~ %b%F{240}\$vcs_info_msg_0_%k$LDART
+PROMPT="\$VI_MODE%F{220} %m %F{166}%K{31}\$LDART%F{231}%B \$SMILY %n %b%F{31}%K{240}\$LDART%F{252}%B \$DIRIC %3~ %b%F{240}\$vcs_info_msg_0_%k$LDART
 \$(virtualenv_info)$LDART "
 RPROMPT="%F{16}%k\$RDART%F{231}%K{16} \$? %F{220}\$RDART%F{24}%K{220} %* "
 zle -N zle-line-init
