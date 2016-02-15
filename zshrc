@@ -4,9 +4,13 @@ ttyctl -f
 
 # some zsh variables
 ZDOTDIR=$HOME/.config/zsh
-LDART=$'\u25ba'
-RDART=$'\u25c0'
 GITUSER=`git config user.name`
+
+# special chars
+LDART=$'\ue0b0'
+RDART=$'\ue0b2'
+BRNCH=$'\ue0a0'
+ENVIR=$'\u24d4'
 
 # history
 HISTFILE=$ZDOTDIR/zhst
@@ -39,28 +43,28 @@ zstyle ':completion:*' rehash true
 function virtualenv_info(){
     venv=''
     [[ -n "$VIRTUAL_ENV" ]] && venv="${VIRTUAL_ENV##*/}"
-    [[ -n "$venv" ]] && echo "$venv $LDART "
+    [[ -n "$venv" ]] && echo "%F{231}%K{74} $ENVIR $venv %F{74}%k"
 }
 
 # add vcs information to prompt
 zstyle ':vcs_info:git*' check-for-changes true
-zstyle ':vcs_info:git*' formats " $LDART %{$fg[cyan]%}%s:%{$fg[blue]%}%r/%b %m%u%c "
+zstyle ':vcs_info:git*' formats "%F{240}%K{236}$LDART%F{250} $BRNCH %s:%r/%b %m%u%c %F{236}"
 
 # add vi-mode to prompt
-VI_MODE="%{$fg[green]%}INSERT%{$reset_color%}"
+VI_MODE="%F{22}%K{148}%B INSERT %b%F{148}%K{166}$LDART"
 function zle-line-init zle-keymap-select {
     case ${KEYMAP} in
-      (vicmd)      VI_MODE="%{$fg[magenta]%}COMMND%{$reset_color%}" ;;
-      (main|viins) VI_MODE="%{$fg[green]%}INSERT%{$reset_color%}" ;;
-      (*)          VI_MODE="%{$fg[green]%}INSERT%{$reset_color%}" ;;
+      (vicmd)      VI_MODE="%F{23}%K{231}%B COMMND %b%F{231}%K{166}$LDART" ;;
+      (main|viins) VI_MODE="%F{22}%K{148}%B INSERT %b%F{148}%K{166}$LDART" ;;
+      (*)          VI_MODE="%F{22}%K{148}%B INSERT %b%F{148}%K{166}$LDART" ;;
     esac
     zle reset-prompt
 }
 
 # setup prompt
-PROMPT="%{$fg[red]%}%n%{$reset_color%}@%{$fg[cyan]%}%m:%{$fg[blue]%}%3d\$vcs_info_msg_0_
-%{$fg[blue]%}\$(virtualenv_info)%{$reset_color%}\$VI_MODE \$LDART "
-RPROMPT="\$RDART %{$fg[red]%}%?%{$reset_color%}"
+PROMPT="\$VI_MODE%F{220} %m %F{166}%K{31}\$LDART%F{231}%B %n %b%F{31}%K{240}\$LDART%F{252}%B %3~ %b%F{240}\$vcs_info_msg_0_%k$LDART
+\$(virtualenv_info)$LDART "
+RPROMPT="%F{16}%k\$RDART%F{231}%K{16} \$? %F{220}\$RDART%F{24}%K{220} %* "
 zle -N zle-line-init
 zle -N zle-keymap-select
 
@@ -163,13 +167,14 @@ export PATH="$HOME/.gem/ruby/2.2.0/bin:$PATH"
 export PATH="$HOME/node_modules/.bin:$PATH"
 
 # virtualenvwrapper
+export TERM="xterm-256color"
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2.7
 export WORKON_HOME=$HOME/virtualenvs
 [ -x /usr/bin/virtualenvwrapper.sh ] && source /usr/bin/virtualenvwrapper.sh
 
 # import extra zsh config
-[ -x $HOME/.zshrc.extra ] && source $HOME/.zshrc.extra
+[ -r $HOME/.zshrc.extra ] && source $HOME/.zshrc.extra
 
 # zsh-syntax-highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
