@@ -65,7 +65,8 @@ function zle-line-init zle-keymap-select {
 }
 
 # setup prompt
-PROMPT="\$VI_MODE%F{220} %m %F{166}%K{31}\$LDART%F{231}%B \$SMILY %n %b%F{31}%K{240}\$LDART%F{252}%B \$DIRIC %3~ %b%F{240}\$vcs_info_msg_0_%k$LDART
+PROMPT="
+\$VI_MODE%F{220} %m %F{166}%K{31}\$LDART%F{231}%B \$SMILY %n %b%F{31}%K{240}\$LDART%F{252}%B \$DIRIC %3~ %b%F{240}\$vcs_info_msg_0_%k$LDART
 \$(virtualenv_info)$LDART%f%k "
 RPROMPT="%F{16}%k\$RDART%F{231}%K{16} \$? %F{220}\$RDART%F{24}%K{220} %* "
 zle -N zle-line-init
