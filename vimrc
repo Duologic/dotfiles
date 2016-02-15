@@ -55,10 +55,13 @@ set directory=~/.vim/swp/
 " Colors & Syntax highlighting
 filetype plugin indent on
 syntax on
+let g:solarized_termtrans=1
 let g:solarized_termcolors=256
 let g:solarized_diffmode="high"
 set background=light
 colorscheme solarized
+hi ColorColumn ctermbg=231
+hi LineNr ctermbg=231
 
 " Jedi-vim options
 let g:jedi#use_splits_not_buffers = "left"
