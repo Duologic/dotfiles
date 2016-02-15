@@ -10,7 +10,7 @@ GITUSER=`git config user.name`
 LDART=$'\ue0b0'
 RDART=$'\ue0b2'
 BRNCH=$'\ue0a0'
-ENVIR=$'\u24d4'
+ENVIR=$'\u2709'
 DIRIC=$'\u27b2'
 SMILY=$'\u2620'
 
@@ -39,6 +39,7 @@ bindkey -M vicmd v edit-command-line
 zstyle :compinstall filename '$HOME/.zshrc'
 zstyle ':completion:*' menu select
 zstyle ':completion:*' rehash true
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 [ -x /usr/share/doc/pkgfile/command-not-found.zsh ] && source /usr/share/doc/pkgfile/command-not-found.zsh
 
 # add virtualenv info to prompt
@@ -65,7 +66,7 @@ function zle-line-init zle-keymap-select {
 
 # setup prompt
 PROMPT="\$VI_MODE%F{220} %m %F{166}%K{31}\$LDART%F{231}%B \$SMILY %n %b%F{31}%K{240}\$LDART%F{252}%B \$DIRIC %3~ %b%F{240}\$vcs_info_msg_0_%k$LDART
-\$(virtualenv_info)$LDART "
+\$(virtualenv_info)$LDART%f%k "
 RPROMPT="%F{16}%k\$RDART%F{231}%K{16} \$? %F{220}\$RDART%F{24}%K{220} %* "
 zle -N zle-line-init
 zle -N zle-keymap-select
@@ -180,7 +181,7 @@ export WORKON_HOME=$HOME/virtualenvs
 
 # zsh-syntax-highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
-[ -x /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[ -r /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # tmux config
 if which tmux 2>&1 >/dev/null; then
