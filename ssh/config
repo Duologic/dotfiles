@@ -1,0 +1,9 @@
+Host *
+    User jeroen.opteynde
+    IdentityFile ~/.ssh/id_rsa
+    TCPKeepAlive yes
+    ControlMaster auto
+    ControlPath ~/.ssh/master-%r@%h:%p
+    ServerAliveInterval 60
+    ControlPersist 30m
+    UseRoaming no

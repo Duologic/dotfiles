@@ -8,3 +8,7 @@ config/x11vnc/passwd
 config/zsh/zhst
 config/less/lesshst
 config/less/mysqlhst
+
+# SSH
+ssh/id_rsa
+ssh/id_rsa.pub
