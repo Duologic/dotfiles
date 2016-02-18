@@ -186,5 +186,6 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
 # tmux config
 if which tmux 2>&1 >/dev/null; then
+    export TERM="screen-256color"
     test -z "$TMUX" && (tmux attach || tmux)
 fi
