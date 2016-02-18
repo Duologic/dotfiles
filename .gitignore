@@ -6,9 +6,11 @@ vim/swp/*
 # Config
 config/x11vnc/passwd
 config/zsh/zhst
+config/zsh/.zcompdump
 config/less/lesshst
 config/less/mysqlhst
 
 # SSH
 ssh/id_rsa
 ssh/id_rsa.pub
+ssh/known_hosts
