@@ -39,7 +39,10 @@ set ruler
 set laststatus=2
 set cmdheight=2
 set shortmess=a
-set statusline=%F%m%r%h%w\ %{fugitive#statusline()}\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+"set statusline=%F%m%r%h%w\ %{fugitive#statusline()}\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='powerlineish'
+let g:airline_powerline_fonts = 1
 
 " No clue what this does
 autocmd BufReadPost *
@@ -65,8 +68,3 @@ hi LineNr ctermbg=231
 
 " Jedi-vim options
 let g:jedi#use_splits_not_buffers = "left"
-
-" Turn off Powerline
-let g:powerline_loaded = 1
-" Add Python3 for Powerline
-" let $PYTHONPATH='/usr/lib/python3.5/site-packages'
