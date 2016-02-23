@@ -75,8 +75,8 @@ local layouts =
 if beautiful.wallpaper then
     for s = 1, screen.count() do
         -- gears.wallpaper.maximized(beautiful.wallpaper, s, true)
-        -- gears.wallpaper.maximized("/home/duologic/Images/bg/Subtle-blue-1920x1200.jpg", s, true)
-        gears.wallpaper.centered("/home/duologic/Images/mobile-vikings.png", s, "white")
+        -- gears.wallpaper.maximized("/path/to/background.jpg", s, true)
+        gears.wallpaper.centered("/home/duologic/img/mobile-vikings.png", s, "white")
     end
 end
 -- }}}
