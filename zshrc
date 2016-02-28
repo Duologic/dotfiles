@@ -15,7 +15,7 @@ DIRIC=$'\u27b2'
 SMILY=$'\u2620'
 
 # history
-HISTFILE=$ZDOTDIR/zhst
+HISTFILE=$HOME/.local/history/zhst
 HISTSIZE=1000
 SAVEHIST=1000
 setopt HIST_IGNORE_DUPS
@@ -159,15 +159,15 @@ eval $(keychain --nogui --eval --agents ssh -Q --quiet --ignore-missing id_rsa)
 # general exported variables
 export DISPLAY=:0
 export EDITOR=vim
-export LESSHISTFILE=$HOME/.config/less/lesshst
+export LESSHISTFILE=$HOME/.local/history/lesshst
 export PSQLRC=$HOME/.config/psql/psqlrc
-export MYSQL_HISTFILE=$HOME/.config/mysql/mysqlhst
+export MYSQL_HISTFILE=$HOME/.local/history/mysqlhst
 export XDG_CACHE_HOME=$HOME/.cache
 
 # OS specific paths
 export JAVA_HOME=/usr/lib/jvm/default
 export PATH="$HOME/.cabal/bin:$PATH"
-export PATH="$HOME/.gem/ruby/2.2.0/bin:$PATH"
+export PATH="$HOME/.gem/ruby/2.3.0/bin:$PATH"
 export PATH="$HOME/node_modules/.bin:$PATH"
 
 # virtualenvwrapper

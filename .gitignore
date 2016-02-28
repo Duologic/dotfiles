@@ -2,13 +2,14 @@
 vim/viminfo
 vim/backup/*
 vim/swp/*
+vim/.netrwhist
 
 # Config
 config/x11vnc/passwd
-config/zsh/zhst
 config/zsh/.zcompdump
-config/less/lesshst
-config/less/mysqlhst
+config/chromium/
+config/menus/
+config/xrandr/default.sh
 
 # SSH
 ssh/id_rsa

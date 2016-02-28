@@ -21,9 +21,6 @@ setxkbmap -option compose:ralt
 # Load Xmodmap
 [ -r $HOME/.Xmodmap ] && xmodmap $HOME/.Xmodmap
 
-# Allow X tranparency
-xcompmgr &
-
 # Sync clipboards
 autocutsel -fork
 autocutsel -selection PRIMARY -fork
