@@ -163,6 +163,8 @@ export LESSHISTFILE=$HOME/.local/history/lesshst
 export PSQLRC=$HOME/.config/psql/psqlrc
 export MYSQL_HISTFILE=$HOME/.local/history/mysqlhst
 export XDG_CACHE_HOME=$HOME/.cache
+export PYTHONSTARTUP=$HOME/.config/python/startup.py
+export IPYTHONDIR=$HOME/.config/ipython
 
 # OS specific paths
 export JAVA_HOME=/usr/lib/jvm/default
@@ -188,4 +190,9 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 if which tmux 2>&1 >/dev/null; then
     export TERM="screen-256color"
     test -z "$TMUX" && (tmux attach || tmux)
+    ssh() {
+        tmux rename-window "$(echo $* | cut -d . -f 1)"
+        command ssh "$@"
+        tmux set-window-option automatic-rename "on" 1>/dev/null
+    }
 fi
