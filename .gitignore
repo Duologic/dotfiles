@@ -1,15 +1,16 @@
 # VIM
-vim/viminfo
+vim/.netrwhist
 vim/backup/*
 vim/swp/*
-vim/.netrwhist
+vim/viminfo
 
 # Config
-config/x11vnc/passwd
-config/zsh/.zcompdump
 config/chromium/
 config/menus/
+config/ipython/profile_default/
+config/x11vnc/passwd
 config/xrandr/default.sh
+config/zsh/.zcompdump
 
 # SSH
 ssh/id_rsa
