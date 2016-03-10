@@ -126,6 +126,7 @@ alias rm='rm -I'
 alias sdig='dig +noall +answer'
 function udig() { echo $1 | awk -F/ '{print $3}' | xargs dig }
 alias view='vim -R'
+alias xsel='xsel -l $HOME/.local/log/xsel.log'
 
 # git aliases
 alias gfetch="git fetch --prune"

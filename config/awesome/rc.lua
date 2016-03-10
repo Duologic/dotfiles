@@ -56,16 +56,16 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
 {
+    awful.layout.suit.tile.top,
+    awful.layout.suit.tile.bottom,
+    awful.layout.suit.tile.left,
+    awful.layout.suit.tile,
     awful.layout.suit.max,
     awful.layout.suit.floating,
-    awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
+    -- awful.layout.suit.spiral,
+    -- awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier
 }
@@ -76,7 +76,7 @@ if beautiful.wallpaper then
     for s = 1, screen.count() do
         -- gears.wallpaper.maximized(beautiful.wallpaper, s, true)
         -- gears.wallpaper.maximized("/path/to/background.jpg", s, true)
-        gears.wallpaper.centered("/home/duologic/img/mobile-vikings.png", s, "white")
+        gears.wallpaper.centered("/home/duologic/img/mobile-vikings.png", s, "black")
     end
 end
 -- }}}
@@ -220,8 +220,14 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
-    awful.key({ }, "XF86Launch7", function() awful.util.spawn("scrot -e 'mv $f ~/Screenshots/ 2>/dev/null'") end),
+    awful.key({ }, "#197", function() awful.util.spawn(terminal) end),
+    awful.key({ }, "XF86Launch9", function() awful.util.spawn(browser) end),
+    awful.key({ }, "XF86Launch8", function() awful.util.spawn("scrot -u") end),
+    awful.key({ }, "XF86Launch7", function() awful.util.spawn("scrot -z") end),
     awful.key({ }, "XF86Launch6", function() awful.util.spawn("slock") end),
+    awful.key({ }, "XF86AudioRaiseVolume", function() awful.util.spawn("pamixer -i 7") end),
+    awful.key({ }, "XF86AudioLowerVolume", function() awful.util.spawn("pamixer -d 7") end),
+    awful.key({ }, "XF86AudioMute", function() awful.util.spawn("pamixer -t") end),
     awful.key({ modkey,           }, "j",
         function ()
             awful.client.focus.byidx( 1)

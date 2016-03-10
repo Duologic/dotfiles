@@ -8,6 +8,7 @@ vim/viminfo
 config/chromium/
 config/menus/
 config/ipython/profile_default/
+config/pulse/
 config/x11vnc/passwd
 config/xrandr/default.sh
 config/zsh/.zcompdump
