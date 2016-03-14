@@ -135,7 +135,7 @@ alias grstart="git checkout master; gupdate; git checkout -b release"
 alias grmaster="git checkout master; gmerge release; git commit"
 ## other
 alias findfile='find . -name '
-alias rm='rm -I'
+alias rm='rm -i'
 alias sdig='dig +noall +answer'
 function udig() { echo $1 | awk -F/ '{print $3}' | xargs dig }
 alias view='vim -R'
