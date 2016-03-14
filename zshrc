@@ -157,7 +157,7 @@ alias pass='pass_cmd'
 qrdecode() { zbarimg -S\*.disable -Sqrcode.enable "$1" -q | sed '1s/^[^:]\+://'; }
 
 # SSH keychain
-which keychain &>/dev/null 2>&1 && eval $(keychain --dir /dev/null --nogui --eval --agents ssh -Q --quiet --ignore-missing id_rsa)
+which keychain &>/dev/null 2>&1 && eval $(keychain --dir $HOME/.cache/ --nogui --eval --agents ssh -Q --quiet --ignore-missing id_rsa)
 
 # general exported variables
 export DISPLAY=:0
@@ -176,7 +176,6 @@ export PATH="$HOME/.gem/ruby/2.3.0/bin:$PATH"
 export PATH="$HOME/node_modules/.bin:$PATH"
 
 # virtualenvwrapper
-export TERM="xterm-256color"
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2.7
 export WORKON_HOME=$HOME/virtualenvs
@@ -190,7 +189,7 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 [ -r /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # tmux config
-if which tmux 2>&1 >/dev/null; then
+if which tmux 2>&1 >/dev/null && [ "$TERM" != "screen-256color" ]; then
     export TERM="screen-256color"
     test -z "$TMUX" && (tmux attach || tmux)
     ssh() {
