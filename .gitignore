@@ -7,6 +7,7 @@ vim/viminfo
 # Config
 config/chromium/
 config/menus/
+config/gimp-2.8/
 config/ipython/profile_default/
 config/pulse/
 config/x11vnc/passwd

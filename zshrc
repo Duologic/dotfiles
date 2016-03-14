@@ -110,25 +110,21 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
 fi
 
 # general aliases
+## ls
+ls --color -d . &>/dev/null 2>&1 && alias ls='ls --color=tty' || alias ls='ls -G'
 alias ls='ls --color'
 alias lsi='ls -ilah'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CFl'
+## grep
 alias sgrep='grep --color -i -n -r -s --exclude-dir=".git"'
 alias sgrepy='sgrep --include="*.py"'
 alias sgreph='sgrep --include="*.html"'
 alias sgrepj='sgrep --include="*.java"'
 alias sgrepc='sgrep --include="*.c"'
 alias sigrepy='sigrep --include="*.py"'
-alias findfile='find . -name '
-alias rm='rm -I'
-alias sdig='dig +noall +answer'
-function udig() { echo $1 | awk -F/ '{print $3}' | xargs dig }
-alias view='vim -R'
-alias xsel='xsel -l $HOME/.local/log/xsel.log'
-
-# git aliases
+## git
 alias gfetch="git fetch --prune"
 alias gdelete='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 alias gmerge="git merge --no-ff --no-commit"
@@ -138,6 +134,13 @@ alias gdiffmaster="git diff master..HEAD"
 alias gfilemaster="git log --oneline --name-status master..HEAD | grep '^[ADM]' | sort | uniq"
 alias grstart="git checkout master; gupdate; git checkout -b release"
 alias grmaster="git checkout master; gmerge release; git commit"
+## other
+alias findfile='find . -name '
+alias rm='rm -I'
+alias sdig='dig +noall +answer'
+function udig() { echo $1 | awk -F/ '{print $3}' | xargs dig }
+alias view='vim -R'
+alias xsel='xsel -l $HOME/.local/log/xsel.log'
 
 # special aliases
 #  Transforms Markdown to Man pages with pandoc
@@ -155,7 +158,7 @@ alias pass='pass_cmd'
 qrdecode() { zbarimg -S\*.disable -Sqrcode.enable "$1" -q | sed '1s/^[^:]\+://'; }
 
 # SSH keychain
-eval $(keychain --nogui --eval --agents ssh -Q --quiet --ignore-missing id_rsa)
+which keychain &>/dev/null 2>&1 && eval $(keychain --dir /dev/null --nogui --eval --agents ssh -Q --quiet --ignore-missing id_rsa)
 
 # general exported variables
 export DISPLAY=:0
