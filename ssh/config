@@ -7,9 +7,3 @@ Host *
     ServerAliveInterval 60
     ControlPersist 30m
     UseRoaming no
-
-Host 192.168.8*
-    IdentityFile ~/.ssh/id_rsa_zeno
-
-Host *.internal.vikingco.com
-    IdentityFile ~/.ssh/id_rsa_zeno
