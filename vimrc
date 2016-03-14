@@ -70,5 +70,6 @@ hi LineNr ctermbg=231
 let g:jedi#use_splits_not_buffers = "left"
 
 " <space>k opens Vexplorer
+let g:netrw_liststyle=3
 let mapleader=" "
 map <leader>k :Vexplore<cr> 
