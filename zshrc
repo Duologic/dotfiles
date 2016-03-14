@@ -178,8 +178,18 @@ export PATH="$HOME/node_modules/.bin:$PATH"
 # virtualenvwrapper
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export WORKON_HOME=$HOME/virtualenvs
-[ -x /usr/bin/python2.7 ] && export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2.7 || [ -x /usr/local/bin/python2.7 ] && export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2.7
-[ -x /usr/bin/virtualenvwrapper.sh ] && source /usr/bin/virtualenvwrapper.sh || [ -x /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
+
+if [ -x /usr/bin/python2.7 ]; then
+    # Arch Linux
+    [ -x /usr/bin/python2.7 ] && export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2.7
+    [ -x /usr/bin/virtualenv2 ] && export VIRTUALENVWRAPPER_VIRTUALENV=/usr/bin/virtualenv2
+    [ -x /usr/bin/virtualenvwrapper.sh ] && source /usr/bin/virtualenvwrapper.sh
+else
+    # Mac OS
+    [ -x /usr/local/bin/python2.7 ] && export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2.7
+    [ -x /usr/local/bin/virtualenv ] && export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/virtualenv
+    [ -x /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
+fi
 
 # import extra zsh config
 [ -r $HOME/.zshrc.extra ] && source $HOME/.zshrc.extra
