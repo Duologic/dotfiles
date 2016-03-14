@@ -68,3 +68,7 @@ hi LineNr ctermbg=231
 
 " Jedi-vim options
 let g:jedi#use_splits_not_buffers = "left"
+
+" <space>k opens Vexplorer
+let mapleader=" "
+map <leader>k :Vexplore<cr> 
