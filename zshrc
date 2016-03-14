@@ -200,7 +200,6 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
 # tmux config
 if which tmux 2>&1 >/dev/null && [ "$TERM" != "screen-256color" ]; then
-    export TERM="screen-256color"
     test -z "$TMUX" && (tmux attach || tmux)
     test -n "$TMUX" && ssh() {
         tmux rename-window "$(echo $* | cut -d . -f 1)"
