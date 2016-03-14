@@ -15,7 +15,7 @@ config/xrandr/default.sh
 config/zsh/.zcompdump
 
 # SSH
-ssh/id_rsa
-ssh/id_rsa.pub
+ssh/id_rsa*
 ssh/known_hosts
 ssh/authorized_keys
+ssh/master-*
