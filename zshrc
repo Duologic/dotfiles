@@ -177,9 +177,9 @@ export PATH="$HOME/node_modules/.bin:$PATH"
 
 # virtualenvwrapper
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2.7
 export WORKON_HOME=$HOME/virtualenvs
-[ -x /usr/bin/virtualenvwrapper.sh ] && source /usr/bin/virtualenvwrapper.sh
+[ -x /usr/bin/python2.7 ] && export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2.7 || [ -x /usr/local/bin/python2.7 ] && export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2.7
+[ -x /usr/bin/virtualenvwrapper.sh ] && source /usr/bin/virtualenvwrapper.sh || [ -x /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
 
 # import extra zsh config
 [ -r $HOME/.zshrc.extra ] && source $HOME/.zshrc.extra
@@ -192,7 +192,7 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 if which tmux 2>&1 >/dev/null && [ "$TERM" != "screen-256color" ]; then
     export TERM="screen-256color"
     test -z "$TMUX" && (tmux attach || tmux)
-    ssh() {
+    test -n "$TMUX" && ssh() {
         tmux rename-window "$(echo $* | cut -d . -f 1)"
         command ssh "$@"
         tmux set-window-option automatic-rename "on" 1>/dev/null
