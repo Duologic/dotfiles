@@ -179,16 +179,16 @@ export PATH="$HOME/node_modules/.bin:$PATH"
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export WORKON_HOME=$HOME/virtualenvs
 
-if [ -x /usr/bin/python2.7 ]; then
+if [ -x /usr/local/bin/python2.7 ]; then
+    # Mac OS (with Brew)
+    [ -x /usr/local/bin/python2.7 ] && export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2.7
+    [ -x /usr/local/bin/virtualenv ] && export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
+    [ -x /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
+else
     # Arch Linux
     [ -x /usr/bin/python2.7 ] && export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2.7
     [ -x /usr/bin/virtualenv2 ] && export VIRTUALENVWRAPPER_VIRTUALENV=/usr/bin/virtualenv2
     [ -x /usr/bin/virtualenvwrapper.sh ] && source /usr/bin/virtualenvwrapper.sh
-else
-    # Mac OS
-    [ -x /usr/local/bin/python2.7 ] && export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2.7
-    [ -x /usr/local/bin/virtualenv ] && export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/virtualenv
-    [ -x /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
 fi
 
 # import extra zsh config
