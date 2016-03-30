@@ -157,7 +157,7 @@ alias pass='pass_cmd'
 qrdecode() { zbarimg -S\*.disable -Sqrcode.enable "$1" -q | sed '1s/^[^:]\+://'; }
 
 # SSH keychain
-which keychain &>/dev/null 2>&1 && eval $(keychain --dir $HOME/.cache/ --nogui --eval --agents ssh -Q --quiet --ignore-missing id_rsa)
+which keychain &>/dev/null 2>&1 && eval $(keychain --dir $HOME/.cache/keychain --nogui --eval --agents ssh -Q --quiet --ignore-missing id_rsa)
 
 # general exported variables
 export DISPLAY=:0
@@ -171,6 +171,7 @@ export IPYTHONDIR=$HOME/.config/ipython
 
 # OS specific paths
 export JAVA_HOME=/usr/lib/jvm/default
+export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.cabal/bin:$PATH"
 export PATH="$HOME/.gem/ruby/2.3.0/bin:$PATH"
 export PATH="$HOME/node_modules/.bin:$PATH"
