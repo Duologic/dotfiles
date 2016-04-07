@@ -116,6 +116,7 @@ alias lsi='ls -ilah'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CFl'
+alias tarls='tar -tvf'
 ## grep
 alias sgrep='grep --color -i -n -r -s --exclude-dir=".git"'
 alias sgrepy='sgrep --include="*.py"'
