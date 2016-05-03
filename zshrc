@@ -135,6 +135,7 @@ alias gfilemaster="git log --oneline --name-status master..HEAD | grep '^[ADM]' 
 alias grstart="git checkout master; gupdate; git checkout -b release"
 alias grmaster="git checkout master; gmerge release; git commit"
 ## other
+alias dfs='df --total -hx tmpfs -x devtmpfs'
 alias findfile='find . -name '
 alias rm='rm -i'
 alias sdig='dig +noall +answer'
@@ -202,10 +203,11 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
 # tmux config
 if which tmux 2>&1 >/dev/null && [ "$TERM" != "screen-256color" ]; then
+    export DISABLE_AUTO_TITLE=true
     test -z "$TMUX" && (tmux attach || tmux)
-    test -n "$TMUX" && ssh() {
-        tmux rename-window "$(echo $* | cut -d . -f 1)"
-        command ssh "$@"
-        tmux set-window-option automatic-rename "on" 1>/dev/null
-    }
+    #test -n "$TMUX" && ssh() {
+    #    tmux rename-window "$(echo $* | cut -d . -f 1)"
+    #    command ssh "$@"
+    #    tmux set-window-option automatic-rename "on" 1>/dev/null
+    #}
 fi

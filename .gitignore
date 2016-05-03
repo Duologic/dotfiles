@@ -10,6 +10,8 @@ config/menus/
 config/gimp-2.8/
 config/ipython/profile_default/
 config/pulse/
+config/Trolltech.conf
+config/VirtualBox/
 config/x11vnc/passwd
 config/xrandr/default.sh
 config/zsh/.zcompdump
