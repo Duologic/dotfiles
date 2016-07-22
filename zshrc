@@ -42,6 +42,7 @@ zstyle ':completion:*' rehash true
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 [ -x /usr/share/doc/pkgfile/command-not-found.zsh ] && source /usr/share/doc/pkgfile/command-not-found.zsh
 
+
 # add virtualenv info to prompt
 function virtualenv_info(){
     venv=''
@@ -139,7 +140,7 @@ alias dfs='df --total -hx tmpfs -x devtmpfs'
 alias findfile='find . -name '
 alias rm='rm -i'
 alias sdig='dig +noall +answer'
-function udig() { echo $1 | awk -F/ '{print $3}' | xargs dig }
+function udig() { echo $1 | awk -F/ '{print $3}' | awk -F':' '{print $1}' | xargs dig }
 alias view='vim -R'
 alias xsel='xsel -l $HOME/.local/log/xsel.log'
 
@@ -158,6 +159,26 @@ alias pass='pass_cmd'
 #  Convert file to qrcode
 qrdecode() { zbarimg -S\*.disable -Sqrcode.enable "$1" -q | sed '1s/^[^:]\+://'; }
 
+cp_p()
+{
+   # https://chris-lamb.co.uk/posts/can-you-get-cp-to-give-a-progress-bar-like-wget
+   strace -q -ewrite cp -- "${1}" "${2}" 2>&1 \
+      | awk '{
+        count += $NF
+            if (count % 10 == 0) {
+               percent = count / total_size * 100
+               printf "%3d%% [", percent
+               for (i=0;i<=percent;i++)
+                  printf "="
+               printf ">"
+               for (i=percent;i<100;i++)
+                  printf " "
+               printf "]\r"
+            }
+         }
+         END { print "" }' total_size=$(stat -c '%s' "${1}") count=0
+}
+
 # SSH keychain
 which keychain &>/dev/null 2>&1 && eval $(keychain --dir $HOME/.cache/keychain --nogui --eval --agents ssh -Q --quiet --ignore-missing id_rsa)
 
@@ -167,6 +188,7 @@ export EDITOR=vim
 export LESSHISTFILE=$HOME/.local/history/lesshst
 export PSQLRC=$HOME/.config/psql/psqlrc
 export MYSQL_HISTFILE=$HOME/.local/history/mysqlhst
+export REDISCLI_HISTFILE=$HOME/.local/history/redisclihst
 export XDG_CACHE_HOME=$HOME/.cache
 export PYTHONSTARTUP=$HOME/.config/python/startup.py
 export IPYTHONDIR=$HOME/.config/ipython
