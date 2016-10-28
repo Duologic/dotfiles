@@ -6,4 +6,5 @@ Host *
     ControlPath ~/.ssh/master-%r@%h:%p
     ServerAliveInterval 60
     ControlPersist 30m
-    UseRoaming no
+    #UseRoaming no
+    #X11Forwarding=no

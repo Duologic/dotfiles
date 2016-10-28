@@ -140,6 +140,7 @@ alias sdig='dig +noall +answer'
 function udig() { echo $1 | awk -F/ '{print $3}' | xargs dig }
 alias view='vim -R'
 alias xsel='xsel -l $HOME/.local/log/xsel.log'
+alias webshare='python -c "import SimpleHTTPServer;SimpleHTTPServer.test()"'
 
 # special aliases
 #  Transforms Markdown to Man pages with pandoc
