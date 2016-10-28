@@ -76,7 +76,7 @@ if beautiful.wallpaper then
     for s = 1, screen.count() do
         -- gears.wallpaper.maximized(beautiful.wallpaper, s, true)
         -- gears.wallpaper.maximized("/path/to/background.jpg", s, true)
-        gears.wallpaper.centered("/home/duologic/img/mobile-vikings.png", s, "black")
+        gears.wallpaper.centered("/home/duologic/img/mv.jpg", s, "black")
     end
 end
 -- }}}

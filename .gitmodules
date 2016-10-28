@@ -25,3 +25,9 @@
 [submodule "config/tmux/tmux-yank"]
 	path = config/tmux/tmux-yank
 	url = git@github.com:tmux-plugins/tmux-yank.git
+[submodule "vim/bundle/vim-surround"]
+	path = vim/bundle/vim-surround
+	url = git@github.com:tpope/vim-surround.git
+[submodule "config/tmux/tmux-cluster"]
+	path = config/tmux/tmux-cluster
+	url = git@github.com:davidscholberg/tmux-cluster.git

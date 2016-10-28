@@ -42,6 +42,7 @@ zstyle ':completion:*' rehash true
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 [ -x /usr/share/doc/pkgfile/command-not-found.zsh ] && source /usr/share/doc/pkgfile/command-not-found.zsh
 
+
 # add virtualenv info to prompt
 function virtualenv_info(){
     venv=''
@@ -116,6 +117,7 @@ alias lsi='ls -ilah'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CFl'
+alias tarls='tar -tvf'
 ## grep
 alias sgrep='grep --color -i -n -r -s --exclude-dir=".git"'
 alias sgrepy='sgrep --include="*.py"'
@@ -134,10 +136,11 @@ alias gfilemaster="git log --oneline --name-status master..HEAD | grep '^[ADM]' 
 alias grstart="git checkout master; gupdate; git checkout -b release"
 alias grmaster="git checkout master; gmerge release; git commit"
 ## other
+alias dfs='df --total -hx tmpfs -x devtmpfs'
 alias findfile='find . -name '
 alias rm='rm -i'
 alias sdig='dig +noall +answer'
-function udig() { echo $1 | awk -F/ '{print $3}' | xargs dig }
+function udig() { echo $1 | awk -F/ '{print $3}' | awk -F':' '{print $1}' | xargs dig }
 alias view='vim -R'
 alias xsel='xsel -l $HOME/.local/log/xsel.log'
 alias webshare='python -c "import SimpleHTTPServer;SimpleHTTPServer.test()"'
@@ -157,8 +160,28 @@ alias pass='pass_cmd'
 #  Convert file to qrcode
 qrdecode() { zbarimg -S\*.disable -Sqrcode.enable "$1" -q | sed '1s/^[^:]\+://'; }
 
+cp_p()
+{
+   # https://chris-lamb.co.uk/posts/can-you-get-cp-to-give-a-progress-bar-like-wget
+   strace -q -ewrite cp -- "${1}" "${2}" 2>&1 \
+      | awk '{
+        count += $NF
+            if (count % 10 == 0) {
+               percent = count / total_size * 100
+               printf "%3d%% [", percent
+               for (i=0;i<=percent;i++)
+                  printf "="
+               printf ">"
+               for (i=percent;i<100;i++)
+                  printf " "
+               printf "]\r"
+            }
+         }
+         END { print "" }' total_size=$(stat -c '%s' "${1}") count=0
+}
+
 # SSH keychain
-which keychain &>/dev/null 2>&1 && eval $(keychain --dir $HOME/.cache/ --nogui --eval --agents ssh -Q --quiet --ignore-missing id_rsa)
+which keychain &>/dev/null 2>&1 && eval $(keychain --dir $HOME/.cache/keychain --nogui --eval --agents ssh -Q --quiet --ignore-missing id_rsa)
 
 # general exported variables
 export DISPLAY=:0
@@ -166,12 +189,14 @@ export EDITOR=vim
 export LESSHISTFILE=$HOME/.local/history/lesshst
 export PSQLRC=$HOME/.config/psql/psqlrc
 export MYSQL_HISTFILE=$HOME/.local/history/mysqlhst
+export REDISCLI_HISTFILE=$HOME/.local/history/redisclihst
 export XDG_CACHE_HOME=$HOME/.cache
 export PYTHONSTARTUP=$HOME/.config/python/startup.py
 export IPYTHONDIR=$HOME/.config/ipython
 
 # OS specific paths
 export JAVA_HOME=/usr/lib/jvm/default
+export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.cabal/bin:$PATH"
 export PATH="$HOME/.gem/ruby/2.3.0/bin:$PATH"
 export PATH="$HOME/node_modules/.bin:$PATH"
@@ -201,10 +226,11 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
 # tmux config
 if which tmux 2>&1 >/dev/null && [ "$TERM" != "screen-256color" ]; then
+    export DISABLE_AUTO_TITLE=true
     test -z "$TMUX" && (tmux attach || tmux)
-    test -n "$TMUX" && ssh() {
-        tmux rename-window "$(echo $* | cut -d . -f 1)"
-        command ssh "$@"
-        tmux set-window-option automatic-rename "on" 1>/dev/null
-    }
+    #test -n "$TMUX" && ssh() {
+    #    tmux rename-window "$(echo $* | cut -d . -f 1)"
+    #    command ssh "$@"
+    #    tmux set-window-option automatic-rename "on" 1>/dev/null
+    #}
 fi
