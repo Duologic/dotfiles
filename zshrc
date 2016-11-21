@@ -27,7 +27,16 @@ autoload -Uz promptinit && promptinit
 autoload edit-command-line
 zle -N edit-command-line
 autoload -Uz vcs_info
-precmd () { vcs_info }
+function preexec() { timer=${timer:-$SECONDS} }
+function precmd () {
+    vcs_info
+    if [ $timer ]; then
+        timer_show=$(($SECONDS - $timer))
+        export RPROMPT="%F{16}%k\$RDART%F{231}%K{16} \$? %F{220}\$RDART%F{24}%K{220} %* %F{16}\$RDART%F{231}%K{16} ${timer_show}s "
+        unset timer
+    fi
+}
+RPROMPT="%F{16}%k\$RDART%F{231}%K{16} \$? %F{220}\$RDART%F{24}%K{220} %* "
 
 # options
 setopt autocd extendedglob notify prompt_subst completealiases
@@ -69,7 +78,6 @@ function zle-line-init zle-keymap-select {
 PROMPT="
 \$VI_MODE%F{220} %m %F{166}%K{31}\$LDART%F{231}%B \$SMILY %n %b%F{31}%K{240}\$LDART%F{252}%B \$DIRIC %3~ %b%F{240}\$vcs_info_msg_0_%k$LDART
 \$(virtualenv_info)$LDART%f%k "
-RPROMPT="%F{16}%k\$RDART%F{231}%K{16} \$? %F{220}\$RDART%F{24}%K{220} %* "
 zle -N zle-line-init
 zle -N zle-keymap-select
 
