@@ -10,11 +10,21 @@
 	default = current
 [merge]
 	tool = vimdiff
+[pager]
+	difftool = true
 [diff]
-	tool = vimdiff
+	tool = icdiff
 [color]
 	ui = true
 [difftool]
 	prompt = false
+[difftool "icdiff"]
+	cmd = icdiff --no-bold --head=5000 --line-numbers -L \"$BASE\" -L \"$REMOTE\" \"$LOCAL\" \"$REMOTE\"
 [alias]
 	d = difftool
+	tags = tag --list
+[help]
+	autocorrect = 10
+[remote "origin"]
+	fetch = +refs/heads/*:refs/remotes/origin/*
+	fetch = +refs/pull/*/head:refs/remotes/origin/pr/*

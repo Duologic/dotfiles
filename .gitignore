@@ -5,19 +5,33 @@ vim/swp/*
 vim/viminfo
 
 # Config
-config/chromium/
-config/menus/
-config/gimp-2.8/
-config/ipython/profile_default/
-config/pulse/
 config/Trolltech.conf
 config/VirtualBox/
+config/chromium/
+config/composer/
+config/configstore/bower-github.json
+config/configstore/bower-github.yml
+config/configstore/update-notifier-npm-check-updates.json
+config/configstore/update-notifier-npm.json
+config/dconf/user
+config/gimp-2.8/
+config/ipython/profile_default/
+config/libreoffice/
+config/menus/
+config/pgcli/history
+config/pgcli/log
+config/pulse/
+config/vlc/
 config/x11vnc/passwd
 config/xrandr/default.sh
 config/zsh/.zcompdump
 
 # SSH
-ssh/id_rsa*
+ssh/id_*
 ssh/known_hosts
 ssh/authorized_keys
 ssh/master-*
+
+# Misc.
+clusterssh/config
+clusterssh/clusters

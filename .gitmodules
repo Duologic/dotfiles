@@ -31,3 +31,15 @@
 [submodule "config/tmux/tmux-cluster"]
 	path = config/tmux/tmux-cluster
 	url = git@github.com:davidscholberg/tmux-cluster.git
+[submodule "vim/dbext"]
+	path = vim/dbext
+	url = git@github.com:vim-scripts/dbext.vim.git
+[submodule "zsh/zsh-autosuggestions"]
+	path = zsh/zsh-autosuggestions
+	url = git@github.com:zsh-users/zsh-autosuggestions.git
+[submodule "zsh/zsh-vimode-visual"]
+	path = zsh/zsh-vimode-visual
+	url = git@github.com:b4b4r07/zsh-vimode-visual.git
+[submodule "vim/bundle/vim-http-client"]
+	path = vim/bundle/vim-http-client
+	url = git@github.com:aquach/vim-http-client.git

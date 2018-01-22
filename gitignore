@@ -3,3 +3,6 @@
 .ropeproject
 *.pyc
 *.egg-info
+.vagrant
+.venv
+*.retry

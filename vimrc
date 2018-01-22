@@ -69,7 +69,14 @@ hi LineNr ctermbg=231
 " Jedi-vim options
 let g:jedi#use_splits_not_buffers = "left"
 
-" <space>k opens Vexplorer
+" <leader>k opens Vexplorer
 let g:netrw_liststyle=3
-let mapleader=" "
 map <leader>k :Vexplore<cr> 
+
+" F8 after search collapses everything unmatched
+set foldexpr=getline(v:lnum)!~@/
+map <F8> :set foldmethod=expr<CR><Bar>zM
+
+map <leader>db :DBPromptForBufferParameters<cr> 
+
+let g:http_client_verify_ssl = 0
