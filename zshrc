@@ -185,6 +185,7 @@ function udig() { echo $1 | awk -F/ '{print $3}' | awk -F':' '{print $1}' | xarg
 alias view='vim -R'
 alias xsel='xsel -l $HOME/.local/log/xsel.log'
 alias webshare='python2 -c "import SimpleHTTPServer;SimpleHTTPServer.test()"'
+alias battery='echo $(cat /sys/class/power_supply/BAT0/capacity)\% $(cat /sys/class/power_supply/BAT0/status)'
 
 # special aliases
 #  Transforms Markdown to Man pages with pandoc

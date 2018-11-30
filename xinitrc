@@ -12,7 +12,7 @@ fi
 [ -x $HOME/.config/xrandr/default.sh ] && $HOME/.config/xrandr/default.sh
 
 # Add fonts in X
-xset +fp /usr/share/fonts/
+#xset +fp /usr/share/fonts/
 xset fp rehash
 
 # Configure Compose key

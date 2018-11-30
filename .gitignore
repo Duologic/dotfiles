@@ -5,6 +5,9 @@ vim/swp/*
 vim/viminfo
 
 # Config
+config/GIMP/
+config/Jaspersoft Studio/
+config/QtProject.conf
 config/Trolltech.conf
 config/VirtualBox/
 config/chromium/
@@ -15,12 +18,16 @@ config/configstore/update-notifier-npm-check-updates.json
 config/configstore/update-notifier-npm.json
 config/dconf/user
 config/gimp-2.8/
+config/gscan2pdfrc
+config/inkscape/
 config/ipython/profile_default/
+config/keepassxc/
 config/libreoffice/
 config/menus/
 config/pgcli/history
 config/pgcli/log
 config/pulse/
+config/teamviewer/
 config/vlc/
 config/x11vnc/passwd
 config/xrandr/default.sh

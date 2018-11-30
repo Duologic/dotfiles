@@ -80,3 +80,12 @@ map <F8> :set foldmethod=expr<CR><Bar>zM
 map <leader>db :DBPromptForBufferParameters<cr> 
 
 let g:http_client_verify_ssl = 0
+command! -range=% -nargs=1 SumColumn <line1>,<line2>!awk -F '|' '{print; sum+=$('<args>' + 1)} END {print "Total: "sum}'
+
+augroup XML
+    autocmd!
+    autocmd FileType xml let g:xml_syntax_folding=1
+    autocmd FileType xml setlocal foldmethod=syntax
+    autocmd FileType xml :syntax on
+    autocmd FileType xml :%foldopen!
+augroup END
