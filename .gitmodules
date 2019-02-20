@@ -43,3 +43,9 @@
 [submodule "vim/bundle/vim-http-client"]
 	path = vim/bundle/vim-http-client
 	url = git@github.com:aquach/vim-http-client.git
+[submodule "vim/bundle/vim-terraform"]
+	path = vim/bundle/vim-terraform
+	url = git@github.com:hashivim/vim-terraform.git
+[submodule "vim/bundle/ansible-vim"]
+	path = vim/bundle/ansible-vim
+	url = git@github.com:pearofducks/ansible-vim.git

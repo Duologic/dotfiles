@@ -77,15 +77,50 @@ map <leader>k :Vexplore<cr>
 set foldexpr=getline(v:lnum)!~@/
 map <F8> :set foldmethod=expr<CR><Bar>zM
 
+" dbext configuration
 map <leader>db :DBPromptForBufferParameters<cr> 
 
-let g:http_client_verify_ssl = 0
+" Small function to calculate sum in a column
 command! -range=% -nargs=1 SumColumn <line1>,<line2>!awk -F '|' '{print; sum+=$('<args>' + 1)} END {print "Total: "sum}'
 
+" XML folding
 augroup XML
     autocmd!
     autocmd FileType xml let g:xml_syntax_folding=1
     autocmd FileType xml setlocal foldmethod=syntax
     autocmd FileType xml :syntax on
     autocmd FileType xml :%foldopen!
+augroup END
+
+" vim-terraform configuration
+let g:terraform_align=1
+let g:terraform_fold_sections=1
+let g:terraform_fmt_on_save=1
+
+" syntastic configuration
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_aggregate_errors = 1
+
+let g:syntastic_enable_signs=1
+let g:syntastic_error_symbol = '✗✗'
+let g:syntastic_style_error_symbol = '✠✠'
+let g:syntastic_warning_symbol = '∆∆'
+let g:syntastic_style_warning_symbol = '≈≈'
+
+" vim-airline / syntastic integration
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#syntastic#error_symbol = '✗✗:'
+let g:airline#extensions#syntastic#stl_format_err = '%E{[%e(#%fe)]}'
+let g:airline#extensions#syntastic#warning_symbol = '∆∆:'
+let g:airline#extensions#syntastic#stl_format_warn = '%W{[%w(#%fw)]}'
+
+" ansible-vim configuration
+augroup ansible_vim_ftyaml_ansible
+    set tabstop=2
+    set shiftwidth=2
+    autocmd BufRead,BufNewFile *.yml set filetype=yaml.ansible
+    let g:syntastic_ansible_checkers = ['yaml/yamllint', 'ansible/ansible_lint']
 augroup END
