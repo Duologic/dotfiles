@@ -20,6 +20,8 @@ HISTSIZE=1000
 SAVEHIST=1000
 setopt HIST_IGNORE_DUPS
 
+[ -f /usr/local/share/zsh-completions ] && fpath=(/usr/local/share/zsh-completions $fpath)
+
 # modules
 autoload -Uz colors && colors
 autoload -Uz compinit && compinit
@@ -156,7 +158,7 @@ ls --color -d . &>/dev/null 2>&1 && alias ls='ls --color=tty' || alias ls='ls -G
 alias lsi='ls -ilah'
 alias ll='ls -alF'
 alias la='ls -A'
-alias l='ls -CFl --group-directories-first'
+alias l='ls -CFl'
 alias tarls='tar -tvf'
 ## grep
 alias sgrep='grep --color -i -n -r -s --exclude-dir=".git"'
@@ -184,8 +186,9 @@ alias sdig='dig +noall +answer'
 function udig() { echo $1 | awk -F/ '{print $3}' | awk -F':' '{print $1}' | xargs dig }
 alias view='vim -R'
 alias xsel='xsel -l $HOME/.local/log/xsel.log'
-alias webshare='python2 -c "import SimpleHTTPServer;SimpleHTTPServer.test()"'
+alias webshare='python2.7 -c "import SimpleHTTPServer;SimpleHTTPServer.test()"'
 alias battery='echo $(cat /sys/class/power_supply/BAT0/capacity)\% $(cat /sys/class/power_supply/BAT0/status)'
+alias watchgitstatus='watch -c git -c color.ui=always status'
 
 # special aliases
 #  Transforms Markdown to Man pages with pandoc

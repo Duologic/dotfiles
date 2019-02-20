@@ -29,6 +29,7 @@ config/pgcli/log
 config/pulse/
 config/teamviewer/
 config/vlc/
+config/xbuild/
 config/x11vnc/passwd
 config/xrandr/default.sh
 config/zsh/.zcompdump
@@ -38,6 +39,7 @@ ssh/id_*
 ssh/known_hosts
 ssh/authorized_keys
 ssh/master-*
+ssh/*.pem
 
 # Misc.
 clusterssh/config
