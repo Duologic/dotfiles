@@ -1,5 +1,10 @@
 " .vimrc
 
+" File encodings
+set enc=utf-8
+set fileencoding=utf-8
+set fileencodings=ucs-bom,utf8,prc
+
 " Some defaults
 set nocp
 set visualbell
@@ -67,6 +72,7 @@ hi ColorColumn ctermbg=231
 hi LineNr ctermbg=231
 
 " Jedi-vim options
+let g:jedi#force_py_version = 3
 let g:jedi#use_splits_not_buffers = "left"
 
 " <leader>k opens Vexplorer
