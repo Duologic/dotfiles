@@ -14,9 +14,14 @@ config/chromium/
 config/composer/
 config/configstore/bower-github.json
 config/configstore/bower-github.yml
+config/configstore/update-notifier-generator-hubot.json
 config/configstore/update-notifier-npm-check-updates.json
 config/configstore/update-notifier-npm.json
+config/configstore/update-notifier-npm.json
+config/configstore/yo.json
 config/dconf/user
+config/doctl/
+config/gcloud/
 config/gimp-2.8/
 config/gscan2pdfrc
 config/inkscape/

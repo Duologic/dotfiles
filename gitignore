@@ -6,3 +6,4 @@
 .vagrant
 .venv
 *.retry
+.DS_Store

@@ -123,10 +123,14 @@ let g:airline#extensions#syntastic#stl_format_err = '%E{[%e(#%fe)]}'
 let g:airline#extensions#syntastic#warning_symbol = '∆∆:'
 let g:airline#extensions#syntastic#stl_format_warn = '%W{[%w(#%fw)]}'
 
+let g:syntastic_html_tidy_ignore_errors = ['trimming empty']
+let g:syntastic_python_checkers = ['flake8']
+
 " ansible-vim configuration
 augroup ansible_vim_ftyaml_ansible
     set tabstop=2
     set shiftwidth=2
     autocmd BufRead,BufNewFile *.yml set filetype=yaml.ansible
     let g:syntastic_ansible_checkers = ['yaml/yamllint', 'ansible/ansible_lint']
+    let g:syntastic_check_on_open = 1
 augroup END
