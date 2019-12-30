@@ -46,8 +46,8 @@ beautiful.notification_icon_size = 50
 naughty.config.defaults['icon_size'] = 50
 
 -- This is used later as the default terminal and editor to run.
-terminal = "/usr/bin/st -f 'DejaVu Sans Mono'"
-browser = "/usr/bin/chromium"
+terminal = "/usr/bin/st -f 'DejaVu Sans Mono-9'"
+browser = "/usr/bin/firefox"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -253,7 +253,7 @@ globalkeys = gears.table.join(
     awful.key({ }, "F7", function() awful.util.spawn("slock") end),
     awful.key({ }, "F8", function() awful.util.spawn(terminal) end),
     awful.key({ }, "F9", function() awful.util.spawn(browser) end),
-    awful.key({ }, "Print", function() awful.util.spawn("scrot -e 'mv $f ~/ 2>/dev/null'") end),
+    awful.key({ }, "F13", function() awful.util.spawn("scrot -e 'mv $f ~/ 2>/dev/null'") end),
     awful.key({ }, "XF86MonBrightnessUp", function() awful.util.spawn("xbacklight -inc 10") end),
     awful.key({ }, "XF86MonBrightnessDown", function() awful.util.spawn("xbacklight -dec 10") end),
     awful.key({ }, "XF86AudioRaiseVolume", function() awful.util.spawn("amixer -q sset Master 5%+") end),
@@ -573,3 +573,6 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+awful.util.spawn_with_shell("~/bin/randr.sh")
+awful.util.spawn_with_shell("~/bin/connect_keyboard.sh")
