@@ -24,6 +24,7 @@ set shiftwidth=4
 set expandtab
 set smarttab
 set autoindent
+set textwidth=120
 
 " Search options
 set hlsearch
@@ -66,6 +67,7 @@ syntax on
 let g:solarized_termtrans=1
 let g:solarized_termcolors=256
 let g:solarized_diffmode="high"
+let g:solarized_visibility="low"
 set background=light
 colorscheme solarized
 hi ColorColumn ctermbg=231
@@ -134,3 +136,16 @@ augroup ansible_vim_ftyaml_ansible
     let g:syntastic_ansible_checkers = ['yaml/yamllint', 'ansible/ansible_lint']
     let g:syntastic_check_on_open = 1
 augroup END
+
+autocmd FileType terraform setlocal foldmarker={,}
+"autocmd FileType go setlocal noexpandtab
+"autocmd FileType go setlocal foldmethod=syntax
+"autocmd FileType go setlocal tabstop=4
+autocmd FileType jsonnet setlocal foldmethod=indent
+"autocmd FileType jsonnet setlocal foldlevel=1
+autocmd FileType jsonnet setlocal foldlevelstart=1
+
+" Ruby autocomplete
+autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
