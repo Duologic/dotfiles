@@ -6,9 +6,12 @@ vim/viminfo
 vim/view/*
 
 # Config
+config/awesome/*.png
+config/awesome/*.xcf
 config/GIMP/
 config/Jaspersoft Studio/
 config/QtProject.conf
+config/Slack
 config/Trolltech.conf
 config/VirtualBox/
 config/chromium/
@@ -25,6 +28,7 @@ config/doctl/
 config/gcloud/
 config/gimp-2.8/
 config/gscan2pdfrc
+config/gtk-2.0/gtkfilechooser.ini
 config/hub
 config/inkscape/
 config/ipython/profile_default/
@@ -36,8 +40,8 @@ config/pgcli/log
 config/pulse/
 config/teamviewer/
 config/vlc/
-config/xbuild/
 config/x11vnc/passwd
+config/xbuild/
 config/xrandr/default.sh
 config/zsh/.zcompdump
 
@@ -52,4 +56,3 @@ ssh/google*
 # Misc.
 clusterssh/config
 clusterssh/clusters
-config/gtk-2.0/gtkfilechooser.ini

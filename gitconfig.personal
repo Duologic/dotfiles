@@ -26,5 +26,4 @@
 [help]
 	autocorrect = 10
 [remote "origin"]
-	fetch = +refs/heads/*:refs/remotes/origin/*
 	fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
