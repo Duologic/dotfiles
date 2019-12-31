@@ -11,3 +11,4 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 [ -f $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ] && source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 [ -f $HOME/.zsh/auto-complete-google-cloud-sdk.zsh ] && source $HOME/.zsh/auto-complete-google-cloud-sdk.zsh
 [ -f $HOME/.zsh/auto-complete-helm.zsh ] && source $HOME/.zsh/auto-complete-helm.zsh
+[ -f $HOME/.zsh/auto-complete-terraform.zsh ] && source $HOME/.zsh/auto-complete-terraform.zsh

@@ -28,9 +28,11 @@ function auto_activate {
     activate_env
     setopt nomatch
 }
-function chpwd() {
+function chpwd_virtualenv () {
     auto_activate
 }
+
+chpwd_functions=(${chpwd_functions[@]} "chpwd_virtualenv")
 
 if [ -x /usr/local/bin/python2.7 ]; then
     # Mac OS (with Brew)

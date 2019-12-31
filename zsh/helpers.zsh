@@ -21,6 +21,7 @@ alias gupdate="git pull origin master; gfetch; gdelete"
 alias glogmaster="git log --oneline master..HEAD"
 alias gdiffmaster="git diff master..HEAD"
 alias gfilemaster="git log --oneline --name-status master..HEAD | grep '^[ADM]' | sort | uniq"
+function gmkbranch { git checkout -b $(date +%Y%m%d)_$1 }
 
 ## other
 alias dfs='df --total -hx tmpfs -x devtmpfs'
@@ -33,6 +34,7 @@ alias xsel='xsel -l $HOME/.local/log/xsel.log'
 alias webshare='python2.7 -c "import SimpleHTTPServer;SimpleHTTPServer.test()"'
 alias battery='echo $(cat /sys/class/power_supply/BAT0/capacity)\% $(cat /sys/class/power_supply/BAT0/status)'
 alias watchgitstatus='watch -c git -c color.ui=always status'
+alias maps='telnet mapscii.me'
 
 # special aliases
 #  Transforms Markdown to Man pages with pandoc
@@ -82,9 +84,20 @@ dtop(){
    watch 'docker ps -a && printf %"$COLUMNS"s |tr " " "-" && docker container ls -a && printf %"$COLUMNS"s |tr " " "-" && docker image ls -a'
 }
 fluxtop(){
-   watch fluxctl --k8s-fwd-ns flux list-workloads -a
+  watch "fluxctl --k8s-fwd-ns flux list-workloads -a | cut -c -$(tput cols)"
+}
+kpodtop(){
+  watch kubectl get pods -A -o wide --sort-by={.spec.nodeName}
 }
 
 tfplansummarize (){
-  terraform show -no-color "$1" | grep '^-\|^  [~+-<]'
+  terraform show -no-color "$1" | grep '^-\|^ *[~+-<]'
+}
+
+gcloud_cpu_limits (){
+  watch "gcloud compute regions describe us-central1 --project "$1" | grep -A1 -B1 :\ CPUS"
+}
+
+decode_k8s_secret (){
+  awk -F':' '{ print $2 }' | base64 -D
 }
