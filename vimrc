@@ -138,9 +138,13 @@ augroup ansible_vim_ftyaml_ansible
 augroup END
 
 autocmd FileType terraform setlocal foldmarker={,}
+
 "autocmd FileType go setlocal noexpandtab
 "autocmd FileType go setlocal foldmethod=syntax
 "autocmd FileType go setlocal tabstop=4
+autocmd FileType go set completeopt=longest,menuone
+" autocmd FileType go setlocal omnifunc=go#complete#GocodeComplete
+
 autocmd FileType jsonnet setlocal foldmethod=indent
 "autocmd FileType jsonnet setlocal foldlevel=1
 autocmd FileType jsonnet setlocal foldlevelstart=1

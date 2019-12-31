@@ -21,7 +21,5 @@ autoload -Uz promptinit && promptinit
 [ -f $HOME/.zsh/spaceship-prompt/spaceship.zsh ] && source $HOME/.zsh/spaceship-prompt/spaceship.zsh
 spaceship_vi_mode_enable
 
-[ -f $HOME/.zsh/zsh-vimode-visual/zsh-vimode-visual.zsh ] && source $HOME/.zsh/zsh-vimode-visual/zsh-vimode-visual.zsh
-
 #ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 #[ -f $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
