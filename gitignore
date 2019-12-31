@@ -7,3 +7,5 @@
 .venv
 *.retry
 .DS_Store
+.env
+.terraform

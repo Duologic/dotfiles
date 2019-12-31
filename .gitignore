@@ -3,6 +3,7 @@ vim/.netrwhist
 vim/backup/*
 vim/swp/*
 vim/viminfo
+vim/view/*
 
 # Config
 config/GIMP/
@@ -24,6 +25,7 @@ config/doctl/
 config/gcloud/
 config/gimp-2.8/
 config/gscan2pdfrc
+config/hub
 config/inkscape/
 config/ipython/profile_default/
 config/keepassxc/
@@ -45,7 +47,9 @@ ssh/known_hosts
 ssh/authorized_keys
 ssh/master-*
 ssh/*.pem
+ssh/google*
 
 # Misc.
 clusterssh/config
 clusterssh/clusters
+config/gtk-2.0/gtkfilechooser.ini
