@@ -64,3 +64,12 @@
 [submodule "vim/bundle/vim-jsbeautify"]
 	path = vim/bundle/vim-jsbeautify
 	url = git@github.com:maksimr/vim-jsbeautify.git
+[submodule "vim/bundle/vim-ruby"]
+	path = vim/bundle/vim-ruby
+	url = git@github.com:vim-ruby/vim-ruby.git
+[submodule "vim/bundle/vim-go"]
+	path = vim/bundle/vim-go
+	url = git@github.com:fatih/vim-go.git
+[submodule "vim/bundle/vim-jsonnet"]
+	path = vim/bundle/vim-jsonnet
+	url = git@github.com:google/vim-jsonnet.git
