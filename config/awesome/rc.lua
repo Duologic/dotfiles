@@ -18,8 +18,8 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
--- Setup displays
-awful.util.spawn_with_shell("~/bin/randr.sh")
+local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
+local net_widgets = require("net_widgets")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -215,6 +215,8 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
+            battery_widget({show_current_level=true, notification=true}),
+            net_widgets.wireless({interface="wlp0s20f3"}),
             wibox.widget.systray(),
             mytextclock,
             s.mylayoutbox,
@@ -241,8 +243,17 @@ globalkeys = gears.table.join(
               {description = "view next", group = "tag"}),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
-    awful.key({ }, "F5", function() awful.util.spawn("slock") end),
-    awful.key({ }, "XF86Tools", function() awful.util.spawn(terminal) end),
+
+    awful.key({ }, "F4", function() awful.util.spawn("autorandr clone-largest") end),
+    awful.key({ }, "F6", function() awful.util.spawn("pavucontrol") end),
+    awful.key({ }, "F7", function() awful.util.spawn("playerctl previous") end),
+    awful.key({ }, "F8", function() awful.util.spawn("playerctl play-pause") end),
+    awful.key({ }, "F9", function() awful.util.spawn("playerctl next") end),
+    awful.key({ }, "F10", function() awful.util.spawn("pamixer -t") end),
+    awful.key({ }, "F11", function() awful.util.spawn("pamixer -d 5") end),
+    awful.key({ }, "F12", function() awful.util.spawn("pamixer -u -i 5") end),
+    awful.key({ }, "#169", function() awful.util.spawn("slock") end),
+    awful.key({ }, "#191", function() awful.util.spawn(terminal) end),
     awful.key({ }, "#192", function() awful.util.spawn("firefox") end),
     awful.key({ }, "#193", function() awful.util.spawn("slack") end),
 
@@ -378,7 +389,29 @@ clientkeys = gears.table.join(
             c.maximized_horizontal = not c.maximized_horizontal
             c:raise()
         end ,
-        {description = "(un)maximize horizontally", group = "client"})
+        {description = "(un)maximize horizontally", group = "client"}),
+
+   -- calc.lua
+   -- https://gist.github.com/alex-pat/b8dcd3ac3ee61c07535407b56db07f78
+   awful.key({ modkey }, "c",
+      function ()
+         awful.prompt.run {
+            prompt       = "Calculate: ",
+            textbox      = awful.screen.focused().mypromptbox.widget,
+            exe_callback = function (text)
+               awful.spawn.easy_async(
+                  "python -c \"from math import * ; print(" .. text .. ")\"",
+                  function(stdout, stderr, exitreason, exitcode)
+                     naughty.notify({
+                           text = 'Result: ' .. string.sub(stdout, 1, -2),
+                           position = "top_left",
+                           timeout = 5
+                     })
+                  end)
+            end
+         }
+      end,
+      {description = "inline calculator", group = "awesome"})
 )
 
 -- Bind all key numbers to tags.
@@ -497,13 +530,25 @@ awful.rules.rules = {
       }, properties = { floating = true }},
 
     -- Add titlebars to normal clients and dialogs
-    { rule_any = {type = { "dialog" }
+    { rule_any = {
+        class = {
+          "Arandr",
+          "Blueman-manager"},
+        type = { "dialog" }
       }, properties = { titlebars_enabled = true }
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },
+
+    { rule = { window = "Firefox - Sharing Indicator" },
+      properties = { y = 0 } },
+
+    { rule_any = {
+        class = {"Pavucontrol", "Spotify"},
+        window = {"Spotify Premium", "Spotify"}
+      }, properties = { screen = 1, tag = "2" } }
 }
 -- }}}
 
@@ -570,6 +615,3 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
-
--- Start bluetooth
-awful.util.spawn_with_shell("blueman")

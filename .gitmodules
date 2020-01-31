@@ -73,3 +73,9 @@
 [submodule "vim/bundle/vim-jsonnet"]
 	path = vim/bundle/vim-jsonnet
 	url = git@github.com:google/vim-jsonnet.git
+[submodule "config/awesome/awesome-wm-widgets"]
+	path = config/awesome/awesome-wm-widgets
+	url = git@github.com:streetturtle/awesome-wm-widgets.git
+[submodule "config/awesome/net_widgets"]
+	path = config/awesome/net_widgets
+	url = git@github.com:pltanton/net_widgets.git
