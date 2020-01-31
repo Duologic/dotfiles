@@ -6,14 +6,15 @@ vim/viminfo
 vim/view/*
 
 # Config
-config/awesome/*.png
-config/awesome/*.xcf
 config/GIMP/
 config/Jaspersoft Studio/
 config/QtProject.conf
 config/Slack
 config/Trolltech.conf
 config/VirtualBox/
+config/autorandr/*/setup
+config/awesome/*.png
+config/awesome/*.xcf
 config/chromium/
 config/composer/
 config/configstore/bower-github.json
@@ -32,18 +33,21 @@ config/gtk-2.0/gtkfilechooser.ini
 config/hub
 config/inkscape/
 config/ipython/profile_default/
+config/k3d/tns
 config/keepassxc/
 config/libreoffice/
 config/menus/
+config/mimeapps.list
+config/pavucontrol.ini
 config/pgcli/history
 config/pgcli/log
 config/pulse/
-config/pavucontrol.ini
+config/spotify/
 config/teamviewer/
 config/vlc/
 config/x11vnc/passwd
 config/xbuild/
-config/xrandr/default.sh
+config/zoomus.conf
 config/zsh/.zcompdump
 
 # SSH
@@ -53,7 +57,3 @@ ssh/authorized_keys
 ssh/master-*
 ssh/*.pem
 ssh/google*
-
-# Misc.
-clusterssh/config
-clusterssh/clusters
