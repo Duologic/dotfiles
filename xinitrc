@@ -9,17 +9,18 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
 fi
 
 # Add fonts in X
-#xset +fp /usr/share/fonts/
+xset +fp /usr/share/fonts/noto
 xset fp rehash
-
-# Configure Compose key
-setxkbmap -option compose:ralt
+xset -dpms
+xset s off
 
 # Scale X resources
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 
-# Load Xmodmap
+# Configure keyboard and mouse
+setxkbmap -layout us -variant altgr-intl
 [ -r $HOME/.Xmodmap ] && xmodmap $HOME/.Xmodmap
+xinput set-prop 11 316 1
 
 # Sync clipboards
 autocutsel -fork

@@ -38,5 +38,7 @@ Xft.dpi: 96
 *.color7:       #c5c8c6
 *.color15:      #955757
 
-URxvt.font: xft:Fantasque Sans Mono:size=11
-URxvt*saveLines:0
+URxvt*termName: rxvt-unicode-256color
+URxvt.scrollBar: false
+URxvt.font: xft:Fantasque Sans Mono:size=11,xft:Symbola
+URxvt.letterSpace: true
