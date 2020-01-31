@@ -101,3 +101,9 @@ gcloud_cpu_limits (){
 decode_k8s_secret (){
   awk -F':' '{ print $2 }' | base64 -D
 }
+
+k3d_set_context () {
+  export KUBECONFIG="$(k3d get-kubeconfig --name=$1):$HOME/.kube/config"
+  export SPACESHIP_KUBECONTEXT_SHOW=true
+  kubectx $1
+}

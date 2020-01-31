@@ -17,6 +17,7 @@ function kctxshow () {
   fi
 }
 
+SPACESHIP_GOLANG_SHOW=false
 autoload -Uz promptinit && promptinit
 [ -f $HOME/.zsh/spaceship-prompt/spaceship.zsh ] && source $HOME/.zsh/spaceship-prompt/spaceship.zsh
 spaceship_vi_mode_enable

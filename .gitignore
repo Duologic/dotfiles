@@ -38,6 +38,7 @@ config/menus/
 config/pgcli/history
 config/pgcli/log
 config/pulse/
+config/pavucontrol.ini
 config/teamviewer/
 config/vlc/
 config/x11vnc/passwd

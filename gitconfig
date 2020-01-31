@@ -1,6 +1,6 @@
 [user]
-	name = Jeroen Op 't Eynde
-	email = jeroen.opteynde@tradelec.be
+	name = Duologic
+	email = jeroen@simplistic.be
 [credential]
 	helper = cache --timeout=3600
 [core]
@@ -26,5 +26,6 @@
 [help]
 	autocorrect = 10
 [remote "origin"]
-	fetch = +refs/heads/*:refs/remotes/origin/*
 	fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
+[hub]
+	protocol = ssh

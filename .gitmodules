@@ -22,9 +22,6 @@
 [submodule "vim/bundle/vim-airline-themes"]
 	path = vim/bundle/vim-airline-themes
 	url = git@github.com:vim-airline/vim-airline-themes.git
-[submodule "config/tmux/tmux-yank"]
-	path = config/tmux/tmux-yank
-	url = git@github.com:tmux-plugins/tmux-yank.git
 [submodule "vim/bundle/vim-surround"]
 	path = vim/bundle/vim-surround
 	url = git@github.com:tpope/vim-surround.git

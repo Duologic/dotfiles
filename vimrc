@@ -107,7 +107,7 @@ let g:terraform_fmt_on_save=1
 
 " syntastic configuration
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
+let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_aggregate_errors = 1
@@ -127,6 +127,8 @@ let g:airline#extensions#syntastic#stl_format_warn = '%W{[%w(#%fw)]}'
 
 let g:syntastic_html_tidy_ignore_errors = ['trimming empty']
 let g:syntastic_python_checkers = ['flake8']
+
+let g:syntastic_go_checkers = ['errcheck', 'go']
 
 " ansible-vim configuration
 augroup ansible_vim_ftyaml_ansible
@@ -153,3 +155,8 @@ autocmd FileType jsonnet setlocal foldlevelstart=1
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+
+" Template (bash)
+augroup templates
+  autocmd BufNewFile *.sh 0r ~/.vim/templates/skel.bash
+augroup END
