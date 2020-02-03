@@ -533,7 +533,9 @@ awful.rules.rules = {
     { rule_any = {
         class = {
           "Arandr",
-          "Blueman-manager"},
+          "Blueman-manager",
+          "Sxiv"
+        },
         type = { "dialog" }
       }, properties = { titlebars_enabled = true }
     },

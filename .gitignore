@@ -37,7 +37,6 @@ config/k3d/tns
 config/keepassxc/
 config/libreoffice/
 config/menus/
-config/mimeapps.list
 config/pavucontrol.ini
 config/pgcli/history
 config/pgcli/log
