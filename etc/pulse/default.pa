@@ -140,3 +140,11 @@ load-module module-filter-apply
 ### Make some devices default
 #set-default-sink output
 #set-default-source input
+
+# Internal Audio
+load-module module-alsa-sink device=hw:0,0 channels=4
+# Internal Mic
+load-module module-alsa-source device=hw:0,6 channels=4
+# HDMI Audio
+load-module module-alsa-sink device=hw:0,3
+
