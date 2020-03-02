@@ -20,7 +20,7 @@ alias gdelete='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 alias gupdate="git pull origin master; gfetch; gdelete"
 alias glogmaster="git log --oneline master..HEAD"
 alias gdiffmaster="git diff master..HEAD"
-alias gfilemaster="git log --oneline --name-status master..HEAD | grep '^[ADM]' | sort | uniq"
+alias gfilemaster="git diff --name-only master HEAD"
 function gmkbranch { git checkout -b $(date +%Y%m%d)_$1 }
 
 ## other

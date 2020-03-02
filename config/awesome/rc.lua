@@ -244,18 +244,21 @@ globalkeys = gears.table.join(
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
 
-    awful.key({ }, "F4", function() awful.util.spawn("autorandr clone-largest") end),
-    awful.key({ }, "F6", function() awful.util.spawn("pavucontrol") end),
-    awful.key({ }, "F7", function() awful.util.spawn("playerctl previous") end),
-    awful.key({ }, "F8", function() awful.util.spawn("playerctl play-pause") end),
-    awful.key({ }, "F9", function() awful.util.spawn("playerctl next") end),
-    awful.key({ }, "F10", function() awful.util.spawn("pamixer -t") end),
-    awful.key({ }, "F11", function() awful.util.spawn("pamixer -d 5") end),
-    awful.key({ }, "F12", function() awful.util.spawn("pamixer -u -i 5") end),
-    awful.key({ }, "#169", function() awful.util.spawn("slock") end),
-    awful.key({ }, "#191", function() awful.util.spawn(terminal) end),
-    awful.key({ }, "#192", function() awful.util.spawn("firefox") end),
-    awful.key({ }, "#193", function() awful.util.spawn("slack") end),
+    awful.key({ }, "XF86Display",           function() awful.util.spawn("autorandr -c") end),
+    awful.key({ }, "XF86AudioPrev",         function() awful.util.spawn("playerctl previous") end),
+    awful.key({ }, "XF86AudioPlay",         function() awful.util.spawn("playerctl play-pause") end),
+    awful.key({ }, "XF86AudioNext",         function() awful.util.spawn("playerctl next") end),
+    awful.key({ }, "XF86AudioMute",         function() awful.util.spawn("pamixer -t") end),
+    awful.key({ }, "XF86AudioLowerVolume",  function() awful.util.spawn("pamixer -d 5") end),
+    awful.key({ }, "XF86AudioRaiseVolume",  function() awful.util.spawn("pamixer -u -i 5") end),
+
+    awful.key({ }, "#169", function() awful.util.spawn("slock") end,            {description="slock",                 group="shortcuts"}), -- eject key
+    awful.key({ }, "#191", function() awful.util.spawn(terminal) end,           {description="F13 terminal",          group="shortcuts"}),
+    awful.key({ }, "#192", function() awful.util.spawn("firefox") end,          {description="F14 firefox",           group="shortcuts"}),
+    awful.key({ }, "#193", function() awful.util.spawn("slack") end,            {description="F15 slack",             group="shortcuts"}),
+    awful.key({ }, "#194", function() awful.util.spawn("pavucontrol") end,      {description="F16 pavucontrol",       group="shortcuts"}),
+    awful.key({ }, "#195", function() awful.util.spawn("spotify") end,          {description="F17 spotify",           group="shortcuts"}),
+    awful.key({ }, "#196", function() awful.util.spawn("autorandr docked") end, {description="F18 autorandr docked",  group="shortcuts"}),
 
     awful.key({ modkey,           }, "j",
         function ()

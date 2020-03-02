@@ -33,7 +33,7 @@ config/gtk-2.0/gtkfilechooser.ini
 config/hub
 config/inkscape/
 config/ipython/profile_default/
-config/k3d/tns
+config/k3d/
 config/keepassxc/
 config/libreoffice/
 config/menus/
