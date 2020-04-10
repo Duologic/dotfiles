@@ -142,9 +142,17 @@ load-module module-filter-apply
 #set-default-source input
 
 # Internal Audio
-load-module module-alsa-sink device=hw:0,0 channels=4
+load-module module-alsa-sink sink_name=internal device=hw:1,0 channels=4
 # Internal Mic
-load-module module-alsa-source device=hw:0,6 channels=4
+load-module module-alsa-source device=hw:1,6 channels=4
 # HDMI Audio
-load-module module-alsa-sink device=hw:0,3
+load-module module-alsa-sink sink_name=hdmi device=hw:1,3
+set-default-sink hdmi
 
+# Echo canceling
+# "module-switch-on-connect" with "ignore_virtual=no" (needs PulseAudio 12 or higher) is needed to automatically move existing streams to a new (virtual) default source and sink.
+load-module module-switch-on-connect ignore_virtual=no
+
+load-module module-echo-cancel use_master_format=1 aec_method=webrtc aec_args="analog_gain_control=0 digital_gain_control=1" source_name=echoCancel_source sink_name=echoCancel_sink
+set-default-source echoCancel_source
+set-default-sink echoCancel_sink

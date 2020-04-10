@@ -76,6 +76,6 @@
 [submodule "config/awesome/net_widgets"]
 	path = config/awesome/net_widgets
 	url = git@github.com:pltanton/net_widgets.git
-[submodule "carbonx1"]
-	path = carbonx1
-	url = git@gist.github.com:dd81e429dc86f4327ded7a2030e7d7d9.git
+[submodule "vim/bundle/vim-ripgrep"]
+	path = vim/bundle/vim-ripgrep
+	url = git@github.com:jremmen/vim-ripgrep.git
