@@ -102,6 +102,10 @@ decode_k8s_secret (){
   awk -F':' '{ print $2 }' | base64 -D
 }
 
+kubectx () {
+  export SPACESHIP_KUBECONTEXT_SHOW=true
+  /usr/bin/kubectx $1
+}
 k3d_set_context () {
   export KUBECONFIG="$(k3d get-kubeconfig --name=$1):$HOME/.kube/config"
   export SPACESHIP_KUBECONTEXT_SHOW=true

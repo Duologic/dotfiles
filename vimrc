@@ -129,6 +129,9 @@ let g:syntastic_html_tidy_ignore_errors = ['trimming empty']
 let g:syntastic_python_checkers = ['flake8']
 
 let g:syntastic_go_checkers = ['errcheck', 'go']
+let g:go_fmt_experimental = 1
+autocmd FileType go setlocal foldmethod=syntax
+autocmd FileType go set completeopt=longest,menuone
 
 " ansible-vim configuration
 augroup ansible_vim_ftyaml_ansible
@@ -140,12 +143,6 @@ augroup ansible_vim_ftyaml_ansible
 augroup END
 
 autocmd FileType terraform setlocal foldmarker={,}
-
-"autocmd FileType go setlocal noexpandtab
-"autocmd FileType go setlocal foldmethod=syntax
-"autocmd FileType go setlocal tabstop=4
-autocmd FileType go set completeopt=longest,menuone
-" autocmd FileType go setlocal omnifunc=go#complete#GocodeComplete
 
 autocmd FileType jsonnet setlocal foldmethod=indent
 "autocmd FileType jsonnet setlocal foldlevel=1

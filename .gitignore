@@ -37,6 +37,7 @@ config/k3d/
 config/keepassxc/
 config/libreoffice/
 config/menus/
+config/obs-studio/
 config/pavucontrol.ini
 config/pgcli/history
 config/pgcli/log
