@@ -157,3 +157,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 augroup templates
   autocmd BufNewFile *.sh 0r ~/.vim/templates/skel.bash
 augroup END
+
+" Spellcheck
+autocmd FileType markdown setlocal spell spelllang=en_us
+autocmd FileType gitcommit setlocal spell spelllang=en_us

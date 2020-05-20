@@ -27,6 +27,7 @@ config/configstore/yo.json
 config/dconf/user
 config/doctl/
 config/gcloud/
+config/gh/config.yml
 config/gimp-2.8/
 config/gscan2pdfrc
 config/gtk-2.0/gtkfilechooser.ini
@@ -38,12 +39,14 @@ config/keepassxc/
 config/libreoffice/
 config/menus/
 config/obs-studio/
+config/pagraphcontrol/
 config/pavucontrol.ini
 config/pgcli/history
 config/pgcli/log
 config/pulse/
 config/spotify/
 config/teamviewer/
+config/vim/spell/
 config/vlc/
 config/x11vnc/passwd
 config/xbuild/

@@ -111,7 +111,8 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+localtextclock = wibox.widget.textclock()
+utctextclock = wibox.widget.textclock("(UTC %H:%M)", 60, "UTC")
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -218,7 +219,8 @@ awful.screen.connect_for_each_screen(function(s)
             battery_widget({show_current_level=true, notification=true}),
             net_widgets.wireless({interface="wlp0s20f3"}),
             wibox.widget.systray(),
-            mytextclock,
+            localtextclock,
+            utctextclock,
             s.mylayoutbox,
         },
     }
@@ -543,17 +545,6 @@ awful.rules.rules = {
       }, properties = { titlebars_enabled = true }
     },
 
-    -- Set Firefox to always map on the tag named "2" on screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { screen = 1, tag = "2" } },
-
-    { rule = { window = "Firefox - Sharing Indicator" },
-      properties = { y = 0 } },
-
-    { rule_any = {
-        class = {"Pavucontrol", "Spotify"},
-        window = {"Spotify Premium", "Spotify"}
-      }, properties = { screen = 1, tag = "2" } }
 }
 -- }}}
 
