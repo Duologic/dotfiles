@@ -1,0 +1,15 @@
+
+
+# Use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) when possible:
+#
+#   verb(area): action
+#
+# Verbs:
+# - feat: Feature, Enhancement, something new
+# - fix: Bugfix, changes that are not features
+# - refactor: No functionality changes
+# - chore: CI, vendoring, build system, housekeeping
+# - test: adding tests
+# - perf: Improving performance, never used this
+# - doc(s): documentation changes
+# - style: linter fixes, whitespace, etc

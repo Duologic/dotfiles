@@ -31,3 +31,5 @@
 	fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
 [hub]
 	protocol = ssh
+[commit]
+	template = ~/.gitmessage
