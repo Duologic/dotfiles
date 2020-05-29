@@ -27,6 +27,9 @@ autocutsel -fork
 #autocutsel -selection PRIMARY -fork
 autocutsel -selection CLIPBOARD -fork
 
+# Use slock to lock screen
+xss-lock slock &
+
 # Config variable for opening Java apps in Awesome
 _JAVA_AWT_WM_NONREPARENTING=1; export _JAVA_AWT_WM_NONREPARENTING
 
