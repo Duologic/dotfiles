@@ -1,11 +1,13 @@
 # VIM
 vim/.netrwhist
 vim/backup/*
+vim/spell/
 vim/swp/*
-vim/viminfo
 vim/view/*
+vim/viminfo
 
 # Config
+config/Debauchee/Barrier.conf
 config/GIMP/
 config/Jaspersoft Studio/
 config/QtProject.conf
@@ -60,3 +62,6 @@ ssh/authorized_keys
 ssh/master-*
 ssh/*.pem
 ssh/google*
+
+# Links
+links/

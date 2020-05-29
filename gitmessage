@@ -10,6 +10,6 @@
 # - refactor: No functionality changes
 # - chore: CI, vendoring, build system, housekeeping
 # - test: adding tests
-# - perf: Improving performance, never used this
+# - perf: Improving performance
 # - doc(s): documentation changes
 # - style: linter fixes, whitespace, etc

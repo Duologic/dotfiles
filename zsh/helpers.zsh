@@ -111,3 +111,8 @@ k3d_set_context () {
   export SPACESHIP_KUBECONTEXT_SHOW=true
   kubectx $1
 }
+
+alias wttr='curl -s "wttr.in?T&0"'
+alias watchwttr='watch curl -s "wttr.in\?T\&0"'
+alias watch='watch '
+httpstatuses () { links "https://httpstatuses.com/$1" }
