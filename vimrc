@@ -80,6 +80,7 @@ let g:jedi#use_splits_not_buffers = "left"
 " <leader>k opens Vexplorer
 let g:netrw_liststyle=3
 map <leader>k :Vexplore<cr> 
+map <leader>t :terminal<cr> 
 
 " F8 after search collapses everything unmatched
 set foldexpr=getline(v:lnum)!~@/
