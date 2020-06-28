@@ -50,7 +50,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='powerlineish'
 let g:airline_powerline_fonts = 1
 
-" No clue what this does
+" Remember cursor location on close
 autocmd BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal! g`\"" |
@@ -84,9 +84,6 @@ map <leader>k :Vexplore<cr>
 " F8 after search collapses everything unmatched
 set foldexpr=getline(v:lnum)!~@/
 map <F8> :set foldmethod=expr<CR><Bar>zM
-
-" dbext configuration
-map <leader>db :DBPromptForBufferParameters<cr> 
 
 " Small function to calculate sum in a column
 command! -range=% -nargs=1 SumColumn <line1>,<line2>!awk -F '|' '{print; sum+=$('<args>' + 1)} END {print "Total: "sum}'
@@ -128,30 +125,21 @@ let g:airline#extensions#syntastic#stl_format_warn = '%W{[%w(#%fw)]}'
 let g:syntastic_html_tidy_ignore_errors = ['trimming empty']
 let g:syntastic_python_checkers = ['flake8']
 
+" golang
 let g:syntastic_go_checkers = ['errcheck', 'go']
 let g:go_fmt_experimental = 1
 autocmd FileType go setlocal foldmethod=syntax
 autocmd FileType go set completeopt=longest,menuone
 
-" ansible-vim configuration
-augroup ansible_vim_ftyaml_ansible
-    set tabstop=2
-    set shiftwidth=2
-    autocmd BufRead,BufNewFile *.yml set filetype=yaml.ansible
-    let g:syntastic_ansible_checkers = ['yaml/yamllint', 'ansible/ansible_lint']
-    let g:syntastic_check_on_open = 1
-augroup END
-
+" terraform folds
 autocmd FileType terraform setlocal foldmarker={,}
 
-autocmd FileType jsonnet setlocal foldmethod=indent
-"autocmd FileType jsonnet setlocal foldlevel=1
+" jsonnet / tanka
+let g:syntastic_jsonnet_checkers = ['jsonnet']
+" Only check formatting because of Tanka import paths
+let g:syntastic_jsonnet_jsonnet_exec = 'jsonnetfmt'
+autocmd FileType jsonnet setlocal foldmethod=syntax
 autocmd FileType jsonnet setlocal foldlevelstart=1
-
-" Ruby autocomplete
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 " Template (bash)
 augroup templates
