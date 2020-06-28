@@ -61,3 +61,6 @@
 [submodule "vim/bundle/vim-markdown"]
 	path = vim/bundle/vim-markdown
 	url = git@github.com:plasticboy/vim-markdown.git
+[submodule "vim/bundle/vim-mdpreview"]
+	path = vim/bundle/vim-mdpreview
+	url = git@github.com:Duologic/vim-mdpreview.git
