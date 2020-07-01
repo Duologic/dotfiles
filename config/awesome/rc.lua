@@ -20,6 +20,7 @@ require("awful.hotkeys_popup.keys")
 
 local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 local net_widgets = require("net_widgets")
+local micmuted_widget = require("micmuted_widget")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -109,8 +110,11 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
+-- Return the micmuted widget
+micmuted = micmuted_widget()
+
 -- {{{ Wibar
--- Create a textclock widget
+-- Create a textclock widget,
 localtextclock = wibox.widget.textclock()
 utctextclock = wibox.widget.textclock("(UTC %H:%M)", 60, "UTC")
 
@@ -216,6 +220,7 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
+            micmuted,
             battery_widget({show_current_level=true, notification=true}),
             net_widgets.wireless({interface="wlp0s20f3"}),
             wibox.widget.systray(),
@@ -253,13 +258,21 @@ globalkeys = gears.table.join(
     awful.key({ }, "XF86AudioMute",         function() awful.util.spawn("pamixer -t") end),
     awful.key({ }, "XF86AudioLowerVolume",  function() awful.util.spawn("pamixer -d 5") end),
     awful.key({ }, "XF86AudioRaiseVolume",  function() awful.util.spawn("pamixer -u -i 5") end),
+    awful.key({ }, "XF86AudioMicMute",      function() awful.util.spawn("amixer set Capture toggle") end),
+    -- fn+F4 on Apple Keyboard
+    awful.key({ }, "XF86LaunchB",           function() awful.util.spawn("amixer set Capture toggle") end),
+    awful.key({ }, "XF86MonBrightnessUp",   function() awful.util.spawn("xbacklight -inc 25") end),
+    awful.key({ }, "XF86MonBrightnessDown", function() awful.util.spawn("xbacklight -dec 25") end),
+    -- fn+F5 on Carbon X keyboard does not map to XF86 key
+    awful.key({ }, "#232",                  function() awful.util.spawn("xbacklight -dec 25") end),
+
 
     awful.key({ }, "#169", function() awful.util.spawn("slock") end,            {description="slock",                 group="shortcuts"}), -- eject key
     awful.key({ }, "#191", function() awful.util.spawn(terminal) end,           {description="F13 terminal",          group="shortcuts"}),
     awful.key({ }, "#192", function() awful.util.spawn("firefox") end,          {description="F14 firefox",           group="shortcuts"}),
     awful.key({ }, "#193", function() awful.util.spawn("slack") end,            {description="F15 slack",             group="shortcuts"}),
     awful.key({ }, "#194", function() awful.util.spawn("pavucontrol") end,      {description="F16 pavucontrol",       group="shortcuts"}),
-    awful.key({ }, "#195", function() awful.util.spawn("spotify") end,          {description="F17 spotify",           group="shortcuts"}),
+    awful.key({ }, "#195", function() awful.util.spawn("spotify-firefox") end,  {description="F17 spotify",           group="shortcuts"}),
     awful.key({ }, "#196", function() awful.util.spawn("autorandr docked") end, {description="F18 autorandr docked",  group="shortcuts"}),
 
     awful.key({ modkey,           }, "j",
