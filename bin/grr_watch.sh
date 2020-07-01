@@ -19,13 +19,25 @@ kubectl port-forward svc/nginx 3100:80 &
 FPID=$!
 echo $FPID
 
-kill_grr_port_forward () {
+export GRAFANA_URL=http://localhost:3100/grafana
+
+grr watch "$WATCH" "$APPLY" &
+GPID=$!
+
+_trap_grr_watch () {
   # kill not really needed, subshell will kill the background job
+  kill $GPID
   kill $FPID
   unset GRAFANA_URL
 }
-trap kill_grr_port_forward EXIT
+trap _trap_grr_watch EXIT
 
-export GRAFANA_URL=http://localhost:3100/grafana
-
-grr watch "$WATCH" "$APPLY"
+while inotifywait -e modify "$WATCH"; do
+  sleep 3
+  CURRENT_WID=$(xdotool getwindowfocus)
+  WID=`xdotool search --name "Mozilla Firefox" | head -1`
+  xdotool windowactivate --sync $WID
+  xdotool key --clearmodifiers ctrl+r
+  sleep 1
+  xdotool windowactivate $CURRENT_WID
+done

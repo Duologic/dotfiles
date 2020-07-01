@@ -41,5 +41,5 @@ Xft.dpi: 96
 
 URxvt*termName: rxvt-unicode-256color
 URxvt.scrollBar: false
-URxvt.font: xft:Fantasque Sans Mono:size=11,xft:Symbola
+URxvt.font: xft:Hack:style=Regular:size=12
 URxvt.letterSpace: true

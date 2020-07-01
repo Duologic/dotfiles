@@ -33,3 +33,5 @@
 	protocol = ssh
 [commit]
 	template = ~/.gitmessage
+[pull]
+	ff = only

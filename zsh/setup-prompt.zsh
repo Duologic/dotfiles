@@ -25,3 +25,5 @@ spaceship_vi_mode_enable
 
 #ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 #[ -f $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+export BAT_THEME="Solarized (light)"

@@ -38,7 +38,7 @@ alias maps='telnet mapscii.me'
 
 # special aliases
 #  Transforms Markdown to Man pages with pandoc
-function md2man () { pandoc -s -f markdown -t man $1 | groff -T utf8 -man | less }
+function md2man () { pandoc -s -f markdown -t man $1 | groff -T utf8 -man | less -S }
 #  Use ncurses for gpg on zsh
 function pass_cmd () {
     sed -i -e "s/gtk-2/curses/g" $HOME/.gnupg/gpg-agent.conf
