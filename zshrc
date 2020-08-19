@@ -1,4 +1,5 @@
 # tty config
+# no-op to force push
 stty -ixon
 ttyctl -f
 
@@ -9,6 +10,8 @@ unsetopt BEEP
 # general exported variables
 export DISPLAY=:0
 export EDITOR=vim
+export PAGER='less --mouse --wheel-lines=5'
+export MANPAGER='less --mouse --wheel-lines=5'
 export XDG_CACHE_HOME=$HOME/.cache
 export JAVA_HOME=/usr/lib/jvm/default
 export GOPATH=$HOME/gocode

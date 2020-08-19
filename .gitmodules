@@ -28,18 +28,12 @@
 [submodule "zsh/zsh-autosuggestions"]
 	path = zsh/zsh-autosuggestions
 	url = git@github.com:zsh-users/zsh-autosuggestions.git
-[submodule "zsh/zsh-vimode-visual"]
-	path = zsh/zsh-vimode-visual
-	url = git@github.com:b4b4r07/zsh-vimode-visual.git
 [submodule "vim/bundle/vim-terraform"]
 	path = vim/bundle/vim-terraform
 	url = git@github.com:hashivim/vim-terraform.git
 [submodule "zsh/spaceship-prompt"]
 	path = zsh/spaceship-prompt
 	url = git@github.com:Duologic/spaceship-prompt.git
-[submodule "zsh/zsh-syntax-highlighting"]
-	path = zsh/zsh-syntax-highlighting
-	url = git@github.com:zsh-users/zsh-syntax-highlighting.git
 [submodule "vim/bundle/vim-go"]
 	path = vim/bundle/vim-go
 	url = git@github.com:fatih/vim-go.git
@@ -61,3 +55,9 @@
 [submodule "vim/bundle/vim-mdpreview"]
 	path = vim/bundle/vim-mdpreview
 	url = git@github.com:Duologic/vim-mdpreview.git
+[submodule "vim/bundle/vim-css-color"]
+	path = vim/bundle/vim-css-color
+	url = git@github.com:ap/vim-css-color.git
+[submodule "vim/bundle/vim-checklist"]
+	path = vim/bundle/vim-checklist
+	url = git@github.com:evansalter/vim-checklist.git

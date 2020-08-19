@@ -14,6 +14,16 @@ alias sgrepp='sgrep --include="*.php"'
 alias sgrepj='sgrep --include="*.java"'
 alias sgrepc='sgrep --include="*.c"'
 
+## Opens first rg match in vim and put cursor at linenumber
+function rgvim() {
+  INPUT=$(rg --line-number $@ | head -1)
+
+  filename=$(echo $INPUT|awk -F':' '{ print $1 }')
+  linenumb=$(echo $INPUT|awk -F':' '{ print $2 }')
+
+  vim +$linenumb $filename
+}
+
 ## git
 alias gfetch="git fetch --prune"
 alias gdelete='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'

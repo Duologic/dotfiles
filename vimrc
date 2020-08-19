@@ -10,6 +10,8 @@ set nocp
 set visualbell
 set wildmenu
 set number
+set relativenumber
+set cursorline
 set showmatch
 set backspace=2
 set mouse=a
@@ -31,6 +33,14 @@ set hlsearch
 set incsearch
 set ignorecase
 set smartcase
+" Ensure search results appear in the middle of the screen
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
+
 
 " Columns
 set colorcolumn=121
@@ -72,6 +82,7 @@ set background=light
 colorscheme solarized
 hi ColorColumn ctermbg=231
 hi LineNr ctermbg=231
+hi CursorLine ctermbg=lightyellow
 
 " Jedi-vim options
 let g:jedi#force_py_version = 3
@@ -150,3 +161,13 @@ augroup END
 " Spellcheck
 autocmd FileType markdown setlocal spell spelllang=en_us
 autocmd FileType gitcommit setlocal spell spelllang=en_us
+
+" Checklist
+nnoremap <leader>cc :ChecklistToggleCheckbox<cr>
+nnoremap <leader>ce :ChecklistEnableCheckbox<cr>
+nnoremap <leader>cd :ChecklistDisableCheckbox<cr>
+vnoremap <leader>cc :ChecklistToggleCheckbox<cr>
+vnoremap <leader>ce :ChecklistEnableCheckbox<cr>
+vnoremap <leader>cd :ChecklistDisableCheckbox<cr>
+au BufNewFile,BufRead *.chklst setf checklist
+let g:checklist_filetypes = ['markdown', 'checklist']
