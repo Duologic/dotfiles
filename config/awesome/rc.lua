@@ -111,7 +111,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- Return the micmuted widget
-micmuted = micmuted_widget()
+micmuted = micmuted_widget.worker()
 
 -- {{{ Wibar
 -- Create a textclock widget,
@@ -240,6 +240,41 @@ root.buttons(gears.table.join(
 ))
 -- }}}
 
+local function mute()
+  awful.util.spawn("amixer set Capture toggle")
+  micmuted_widget.update_mute()
+end
+
+local function move_clients_to_mouse()
+    for i, c in ipairs(client.get()) do
+        -- naughty.notify({ title=tostring(c) })
+        local classes = {
+            "urxvt",
+            "slack",
+            "firefox"
+        }
+        local ignore_firefox_apps = {
+            "open.spotify.com"
+        }
+        for i, class in ipairs(classes) do
+            if class == string.lower(c.class) and class == "firefox" then
+                for i, app in ipairs(ignore_firefox_apps) do
+                    if not(app == string.lower(c.name)) then
+                        awful.client.movetoscreen(c, mouse.screen)
+                    end
+                end
+            else
+                if class == string.lower(c.class) then
+                    awful.client.movetoscreen(c, mouse.screen)
+                end
+            end
+        end
+        if string.lower(c.class) == "urxvt" then
+            awful.client.setmaster(c)
+        end
+    end
+end
+
 -- {{{ Key bindings
 globalkeys = gears.table.join(
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
@@ -258,9 +293,11 @@ globalkeys = gears.table.join(
     awful.key({ }, "XF86AudioMute",         function() awful.util.spawn("pamixer -t") end),
     awful.key({ }, "XF86AudioLowerVolume",  function() awful.util.spawn("pamixer -d 5") end),
     awful.key({ }, "XF86AudioRaiseVolume",  function() awful.util.spawn("pamixer -u -i 5") end),
-    awful.key({ }, "XF86AudioMicMute",      function() awful.util.spawn("amixer set Capture toggle") end),
+    awful.key({ }, "XF86AudioMicMute",      mute),
+    -- fn+F3 on Apple Keyboard
+    awful.key({ }, "XF86LaunchA",           function() awful.util.spawn("setxkbmap -layout us -variant altgr-intl") end),
     -- fn+F4 on Apple Keyboard
-    awful.key({ }, "XF86LaunchB",           function() awful.util.spawn("amixer set Capture toggle") end),
+    awful.key({ }, "XF86LaunchB",           mute),
     awful.key({ }, "XF86MonBrightnessUp",   function() awful.util.spawn("xbacklight -inc 25") end),
     awful.key({ }, "XF86MonBrightnessDown", function() awful.util.spawn("xbacklight -dec 25") end),
     -- fn+F5 on Carbon X keyboard does not map to XF86 key
@@ -272,8 +309,9 @@ globalkeys = gears.table.join(
     awful.key({ }, "#192", function() awful.util.spawn("firefox") end,          {description="F14 firefox",           group="shortcuts"}),
     awful.key({ }, "#193", function() awful.util.spawn("slack") end,            {description="F15 slack",             group="shortcuts"}),
     awful.key({ }, "#194", function() awful.util.spawn("pavucontrol") end,      {description="F16 pavucontrol",       group="shortcuts"}),
-    awful.key({ }, "#195", function() awful.util.spawn("spotify-firefox") end,  {description="F17 spotify",           group="shortcuts"}),
+    awful.key({ }, "#195", function() awful.util.spawn("spotify") end,          {description="F17 spotify",           group="shortcuts"}),
     awful.key({ }, "#196", function() awful.util.spawn("autorandr docked") end, {description="F18 autorandr docked",  group="shortcuts"}),
+    awful.key({ }, "#197", move_clients_to_mouse,                               {description="F19 shuffle clients",   group="shortcuts"}),
 
     awful.key({ modkey,           }, "j",
         function ()

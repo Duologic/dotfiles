@@ -1,0 +1,2 @@
+#!/bin/sh
+firefox --profile /home/duologic/.mozilla/firefox/kpuh1x69.Slack --ssb https://app.slack.com/client/

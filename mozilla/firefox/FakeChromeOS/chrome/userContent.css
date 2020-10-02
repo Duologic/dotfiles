@@ -1,0 +1,7 @@
+/* fix slack sidebar */
+.p-team_sidebar {
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+

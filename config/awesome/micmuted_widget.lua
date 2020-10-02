@@ -18,8 +18,27 @@ local dpi = require('beautiful').xresources.apply_dpi
 local PATH_TO_ICONS = "/usr/share/icons/Arc/status/symbolic/"
 local HOME = os.getenv("HOME")
 
-local micmuted_widget = {}
-local function worker(args)
+local icon_widget = wibox.widget {
+    {
+        id = "icon",
+        widget = wibox.widget.imagebox,
+        resize = false
+    },
+    layout = wibox.container.margin(_, 0, 0, 3)
+}
+
+local level_widget = wibox.widget {
+    font = font,
+    widget = wibox.widget.textbox
+}
+
+local micmuted_widget = wibox.widget {
+    icon_widget,
+    level_widget,
+    layout = wibox.layout.fixed.horizontal,
+}
+
+function micmuted_widget.worker(args)
     local args = args or {}
 
     local margin_left = args.margin_left or 0
@@ -33,25 +52,6 @@ local function worker(args)
         }
     end
 
-    local icon_widget = wibox.widget {
-        {
-            id = "icon",
-            widget = wibox.widget.imagebox,
-            resize = false
-        },
-        layout = wibox.container.margin(_, 0, 0, 3)
-    }
-
-    local level_widget = wibox.widget {
-        font = font,
-        widget = wibox.widget.textbox
-    }
-
-    micmuted_widget = wibox.widget {
-        icon_widget,
-        level_widget,
-        layout = wibox.layout.fixed.horizontal,
-    }
     watch("amixer get Capture", 10,
     function(widget, stdout, stderr, exitreason, exitcode)
         for s in stdout:gmatch("[^\r\n]+") do
@@ -70,4 +70,25 @@ local function worker(args)
     return wibox.container.margin(micmuted_widget, margin_left, margin_right)
 end
 
-return setmetatable(micmuted_widget, { __call = function(_, ...) return worker(...) end })
+function micmuted_widget.update_mute()
+    local f = io.popen("amixer get Capture")
+
+    -- if the cmd cannot be found
+    if f == nil then
+        return false
+    end
+
+    local stdout = f:read("*a")
+    f:close()
+
+    for s in stdout:gmatch("[^\r\n]+") do
+        local status = string.match(s, 'off')
+        if status == 'off' then mutedIcon = "microphone-sensitivity-muted-symbolic"
+        else mutedIcon = "microphone-sensitivity-high-symbolic"
+        end
+    end
+
+    icon_widget.icon:set_image(PATH_TO_ICONS .. mutedIcon .. ".svg")
+end
+
+return setmetatable(micmuted_widget, { __call = function(_, ...) return micmuted_widget end })
