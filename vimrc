@@ -90,6 +90,7 @@ let g:jedi#use_splits_not_buffers = "left"
 
 " <leader>k opens Vexplorer
 let g:netrw_liststyle=3
+let g:netrw_winsize = 75
 map <leader>k :Vexplore<cr> 
 map <leader>t :terminal<cr> 
 
@@ -171,3 +172,5 @@ vnoremap <leader>ce :ChecklistEnableCheckbox<cr>
 vnoremap <leader>cd :ChecklistDisableCheckbox<cr>
 au BufNewFile,BufRead *.chklst setf checklist
 let g:checklist_filetypes = ['markdown', 'checklist']
+
+let g:vim_markdown_folding_disabled = 1
