@@ -7,6 +7,8 @@ vim/view/*
 vim/viminfo
 
 # Config
+config/helm/
+config/jami/
 config/Debauchee/Barrier.conf
 config/GIMP/
 config/Jaspersoft Studio/
