@@ -7,7 +7,7 @@ alias l='ls -CFl'
 alias tarls='tar -tvf'
 
 ## grep
-alias sgrep='ggrep --color -i -n -r -s --exclude-dir=".git"'
+alias sgrep='grep --color -i -n -r -s --exclude-dir=".git"'
 alias sgrepy='sgrep --include="*.py"'
 alias sgreph='sgrep --include="*.html"'
 alias sgrepp='sgrep --include="*.php"'
