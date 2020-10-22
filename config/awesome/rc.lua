@@ -413,8 +413,13 @@ clientkeys = gears.table.join(
         {description = "toggle fullscreen", group = "client"}),
     awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end,
               {description = "close", group = "client"}),
-    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
-              {description = "toggle floating", group = "client"}),
+    awful.key({ modkey, "Control" }, "space",
+        function (c)
+            awful.client.floating.toggle(c)
+            awful.titlebar.toggle(c)
+            c:raise()
+        end ,
+        {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
     awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
@@ -571,7 +576,8 @@ awful.rules.rules = {
           "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
           "Wpa_gui",
           "veromix",
-          "xtightvncviewer"},
+          "xtightvncviewer",
+          "zoom"},
 
         -- Note that the name property shown in xprop might be set slightly after creation of the client
         -- and the name shown there might not match defined rules here.
@@ -590,7 +596,8 @@ awful.rules.rules = {
         class = {
           "Arandr",
           "Blueman-manager",
-          "Sxiv"
+          "Sxiv",
+          "zoom"
         },
         type = { "dialog" }
       }, properties = { titlebars_enabled = true }
