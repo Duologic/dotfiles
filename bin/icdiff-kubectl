@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+function warning() {
+    ORANGE='\033[0;33m'
+    NC='\033[0m' # No Color
+    >&2 printf "${ORANGE}WARNING: ${1}${NC}\n"
+}
+
+warning "last-applied-configuration <redacted>"
+find $1 -type f | xargs sed -i '/kubectl.kubernetes.io\/last-applied-configuration/!b;n;c<redacted>'
+find $2 -type f | xargs sed -i '/kubectl.kubernetes.io\/last-applied-configuration/!b;n;c<redacted>'
+
+warning "ignoring fluxcd.io/* annotations"
+find $1 -type f | xargs sed -i '/fluxcd.io\//d'
+
+warning "ignoring generation: [0-9]+"
+find $1 -type f | xargs sed -i '/generation: [0-9]\+/d'
+find $2 -type f | xargs sed -i '/generation: [0-9]\+/d'
+
+#diff --minimal -u -N $@
+icdiff -r --no-bold --head=5000 --line-numbers --cols $(tput cols) $@
