@@ -126,3 +126,5 @@ alias wttr='curl -s "wttr.in?T&0"'
 alias watchwttr='watch curl -s "wttr.in\?T\&0"'
 alias watch='watch '
 httpstatuses () { links "https://httpstatuses.com/$1" }
+
+export KUBECTL_EXTERNAL_DIFF=icdiff-kubectl
