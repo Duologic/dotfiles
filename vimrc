@@ -174,3 +174,4 @@ au BufNewFile,BufRead *.chklst setf checklist
 let g:checklist_filetypes = ['markdown', 'checklist']
 
 let g:vim_markdown_folding_disabled = 1
+let g:fugitive_git_command = 'git'
