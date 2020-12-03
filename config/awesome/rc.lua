@@ -583,6 +583,7 @@ awful.rules.rules = {
         -- and the name shown there might not match defined rules here.
         name = {
           "Event Tester",  -- xev.
+          "textern", -- with `["/usr/bin/urxvt", "-T", "textern", "-e", "vim", "+call cursor(%l,%c)"]` as external editor
         },
         role = {
           "AlarmWindow",  -- Thunderbird's calendar.
@@ -593,6 +594,9 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {
+        name = {
+          "textern", -- with `["/usr/bin/urxvt", "-T", "textern", "-e", "vim", "+call cursor(%l,%c)"]` as external editor
+        },
         class = {
           "Arandr",
           "Blueman-manager",
