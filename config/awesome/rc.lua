@@ -245,6 +245,10 @@ local function mute()
   micmuted_widget.update_mute()
 end
 
+local function webcam()
+  awful.util.spawn("toggle_webcam")
+end
+
 local function move_clients_to_mouse()
     for i, c in ipairs(client.get()) do
         -- naughty.notify({ title=tostring(c) })
@@ -298,10 +302,12 @@ globalkeys = gears.table.join(
     awful.key({ }, "XF86LaunchA",           function() awful.util.spawn("setxkbmap -layout us -variant altgr-intl") end),
     -- fn+F4 on Apple Keyboard
     awful.key({ }, "XF86LaunchB",           mute),
-    awful.key({ }, "XF86MonBrightnessUp",   function() awful.util.spawn("xbacklight -inc 25") end),
-    awful.key({ }, "XF86MonBrightnessDown", function() awful.util.spawn("xbacklight -dec 25") end),
+    awful.key({ }, "XF86MonBrightnessUp",   function() awful.util.spawn("xbacklight -inc 5") end),
+    awful.key({ }, "XF86MonBrightnessDown", function() awful.util.spawn("xbacklight -dec 5") end),
     -- fn+F5 on Carbon X keyboard does not map to XF86 key
-    awful.key({ }, "#232",                  function() awful.util.spawn("xbacklight -dec 25") end),
+    awful.key({ }, "#232",                  function() awful.util.spawn("xbacklight -dec 5") end),
+    -- fn+F5 on Apple Keyboard
+    awful.key({ }, "#237",                  webcam),
 
 
     awful.key({ }, "#169", function() awful.util.spawn("slock") end,            {description="slock",                 group="shortcuts"}), -- eject key
