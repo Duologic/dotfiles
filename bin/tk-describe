@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+set -euo pipefail
+
+FILE=$(tk env list --json ${PWD} | \
+    jq -r '.[]|.metadata.namespace' | \
+    fzf \
+    --preview 'tk status {}' \
+    --bind 'alt-j:preview-down,alt-k:preview-up')
+
+bash -c "</dev/tty vim '${FILE}'" dummy
