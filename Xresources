@@ -41,7 +41,7 @@ Xft.dpi: 96
 
 URxvt*termName: rxvt-unicode-256color
 URxvt.scrollBar: false
-URxvt.font: xft:Hack:style=Regular:size=12
+URxvt.font: xft:Hack:style=Regular:size=12,xft:Noto Color Emoji:style=Regular
 URxvt.letterSpace: 0
 URxvt.cursorBlink: true
 URxvt.cursorUnderline: false

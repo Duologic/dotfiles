@@ -2,38 +2,32 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-PROJ=$HOME/git/grafana/deployment_tools
+tmux new-session -d -s grafana
 
-tmux new-session -d -s deployment_tools -c $PROJ  -n deployment_tools
-tmux split-window -c $PROJ/ksonnet -t deployment_tools -h
-tmux split-window -c $PROJ -t deployment_tools
-tmux send-keys 'watchgitstatus'
-tmux send-keys Enter
-tmux select-pane -t 1
-tmux send-keys 'cd . && clear'
-tmux send-keys Enter
-tmux select-pane -t 0
-tmux send-keys 'cd . && clear'
-tmux send-keys Enter
+function gitwindow() {
+    NAME=$1
+    PROJ=$2
 
-PROJ=$HOME/git/grafana/deployment_tools_2
+    tmux new-window -c $PROJ -n $NAME
+    tmux split-window -c $PROJ -t $NAME -h
+    tmux split-window -c $PROJ -t $NAME
+    tmux send-keys -t 2 'watchgitstatus'
+    tmux send-keys -t 2 Enter
+    tmux send-keys -t 1 'cd . && clear'
+    tmux send-keys -t 1 Enter
+    tmux send-keys -t 0 'cd . && clear'
+    tmux send-keys -t 0 Enter
+}
 
-tmux new-window -d -c $PROJ  -n deployment_tools_2
-tmux split-window -c $PROJ/ksonnet -t deployment_tools_2 -h
-tmux split-window -c $PROJ -t deployment_tools_2
-tmux select-window -t deployment_tools_2
-tmux send-keys 'watchgitstatus'
-tmux send-keys Enter
-tmux select-pane -t 1
-tmux send-keys 'cd . && clear'
-tmux send-keys Enter
-tmux select-pane -t 0
-tmux send-keys 'cd . && clear'
-tmux send-keys Enter
+gitwindow deployment_tools $HOME/git/grafana/deployment_tools
+gitwindow deployment_tools_2 $HOME/git/grafana/deployment_tools_2
+gitwindow tanka $HOME/git/grafana/tanka
+gitwindow jsonnet-libs $HOME/git/grafana/jsonnet-libs
 
 tmux new-window -d -c $HOME/git/notes -n notes
 tmux new-window -d -c $HOME/git/aur -n aur
 tmux new-window -d -c $HOME/git/dotfiles -n dotfiles
 
+tmux kill-window -t 1
 tmux select-window -t deployment_tools
-tmux attach -t deployment_tools
+tmux attach -t grafana

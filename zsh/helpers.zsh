@@ -25,6 +25,7 @@ function rgvim() {
 }
 
 ## git
+alias grebase="git fetch origin master && git rebase origin/master"
 alias gfetch="git fetch --prune"
 alias gdelete='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 alias gupdate="git pull origin master; gfetch; gdelete"
@@ -128,3 +129,4 @@ alias watch='watch '
 httpstatuses () { links "https://httpstatuses.com/$1" }
 
 export KUBECTL_EXTERNAL_DIFF=icdiff-kubectl
+alias k9x='kubectx && k9s'

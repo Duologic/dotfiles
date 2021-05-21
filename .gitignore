@@ -5,15 +5,16 @@ vim/spell/
 vim/swp/*
 vim/view/*
 vim/viminfo
+vim/viminfo.tmp
 
 # Config
-config/helm/
-config/jami/
 config/Debauchee/Barrier.conf
 config/GIMP/
 config/Jaspersoft Studio/
+config/Mumble/
 config/QtProject.conf
 config/Slack
+config/SonoBus.settings
 config/Trolltech.conf
 config/VirtualBox/
 config/autorandr/*/setup
@@ -33,11 +34,14 @@ config/doctl/
 config/gcloud/
 config/gh/config.yml
 config/gimp-2.8/
+config/gpick/
 config/gscan2pdfrc
 config/gtk-2.0/gtkfilechooser.ini
+config/helm/
 config/hub
 config/inkscape/
 config/ipython/profile_default/
+config/jami/
 config/k3d/
 config/keepassxc/
 config/libreoffice/

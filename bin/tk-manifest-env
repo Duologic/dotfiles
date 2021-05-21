@@ -1,0 +1,30 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+if [[ $# -lt 1 ]]; then
+    echo "Usage: $(basename "${0}") <env> [<keep?>]"
+  exit 1
+fi
+
+
+ENV=${1}
+KEEP=${2:-0}
+
+TMPDIR=$(mktemp -d)
+function finish {
+    if [ "${KEEP}" -ne 0 ]; then 
+        echo "Debug here: ${TMPDIR}"
+    else
+        rm -rf "${TMPDIR}"
+    fi
+}
+trap finish EXIT
+
+${EXECUTABLE} export "${TMPDIR}" "${1}" \
+    --recursive \
+    --merge \
+    --parallel=8 \
+    --format '{{ if env.metadata.labels.fluxExport }}{{ if eq env.metadata.labels.fluxExport "true" }}flux/{{ end }}{{ end }}{{env.metadata.labels.cluster_name}}/{{ if .metadata.namespace }}{{.metadata.namespace}}/{{ else }}_cluster/{{ end }}{{.kind}}-{{.metadata.name}}'
+
+echo "Great success!"

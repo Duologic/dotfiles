@@ -15,6 +15,7 @@ set cursorline
 set showmatch
 set backspace=2
 set mouse=a
+set ttymouse=sgr " make it work properly in tmux
 
 " Pathogen
 call pathogen#infect()
@@ -113,7 +114,8 @@ augroup END
 " vim-terraform configuration
 let g:terraform_align=1
 let g:terraform_fold_sections=1
-let g:terraform_fmt_on_save=1
+let g:terraform_fmt_on_save=0
+autocmd FileType terraform setlocal foldmarker={,}
 
 " syntastic configuration
 let g:syntastic_always_populate_loc_list = 1
@@ -141,11 +143,11 @@ let g:syntastic_python_checkers = ['flake8']
 " golang
 let g:syntastic_go_checkers = ['errcheck', 'go']
 let g:go_fmt_experimental = 1
+let g:go_rename_command = 'gopls'
+let g:go_auto_type_info = 1
+let g:go_debug_windows = {'vars': 'rightbelow 60vnew', 'stack': 'rightbelow 10new'}
 autocmd FileType go setlocal foldmethod=syntax
 autocmd FileType go set completeopt=longest,menuone
-
-" terraform folds
-autocmd FileType terraform setlocal foldmarker={,}
 
 " jsonnet / tanka
 let g:syntastic_jsonnet_checkers = ['jsonnet']
@@ -175,3 +177,71 @@ let g:checklist_filetypes = ['markdown', 'checklist']
 
 let g:vim_markdown_folding_disabled = 1
 let g:fugitive_git_command = 'git'
+
+function! Openfile()
+      call feedkeys("\<CR>\<C-W>w")
+endfunction
+
+" Opens URL in browser
+nnoremap gx :!xdg-open <cWORD> &<CR><CR>
+nnoremap gk :!k8s-alpha.sh <cWORD> &<CR><CR>
+
+" Highlight all instances of word under cursor, when idle.
+" Useful when studying strange source code.
+" Type z/ to toggle highlighting on/off.
+nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
+function! AutoHighlightToggle()
+    let @/ = ''
+    if exists('#auto_highlight')
+        au! auto_highlight
+        augroup! auto_highlight
+        setl updatetime=4000
+        echo 'Highlight current word: off'
+        return 0
+    else
+        augroup auto_highlight
+            au!
+            au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+        augroup end
+        setl updatetime=500
+        echo 'Highlight current word: ON'
+        return 1
+    endif
+endfunction
+
+" Fold at a specific level
+" Source: https://stackoverflow.com/a/25644411
+function! FoldToTheLevel(TheLevel)
+    "set mark "f" at current position
+    execute "normal! mf"
+    "close all the folder recursively
+    execute "normal! ggVGzC"
+
+    "open all the folder which have smaller level
+    let h=0
+    while h<a:TheLevel
+        execute "normal! ggVGzo"
+        let h+=1
+    endwhile
+
+    "open all the folder which have larger level
+    folddoclosed execute "normal! VzOzc"
+    "jump back and show in the middle
+    execute "normal! `fzz"
+endfunction
+command! -nargs=1 F call FoldToTheLevel(<f-args>)
+
+" JSONNET
+au FileType jsonnet nmap <leader>b :call JsonnetEval()<cr>
+function! JsonnetEval()
+  " check if the file is a tanka file or not
+  let output = system("tk tool jpath " . shellescape(expand('%')))
+  if v:shell_error
+    let output = system("jsonnet " . shellescape(expand('%')))
+  else
+    let output = system("tk eval " . shellescape(expand('%')))
+  endif
+  vnew
+  setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile ft=json
+  put! = output
+endfunction

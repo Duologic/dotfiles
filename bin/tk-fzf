@@ -1,14 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-START=${1:-${PWD}}
+COMMAND=${1}
+START=${2:-${PWD}}
 
-FILE=$(tk env list --json "${START}" | \
+SELECTOR=$( \
+    tk env list --json "${START}" | \
     jq -r '.[]|.metadata.namespace+" --name "+.metadata.name' | \
     fzf \
     --with-nth 3 \
     --preview "bash -c 'tk status {1} --name {3}'" \
-    --bind 'alt-j:preview-down,alt-k:preview-up' | \
-    awk -F' ' '{print $1}')
+    --bind 'alt-j:preview-down,alt-k:preview-up' \
+)
 
-bash -c "</dev/tty vim '${FILE}'" dummy
+bash -c "</dev/tty tk ${COMMAND} ${SELECTOR}" dummy

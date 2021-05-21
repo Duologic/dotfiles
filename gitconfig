@@ -25,6 +25,7 @@
 	tags = tag --list
 	recent-branches = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 	authors = shortlog -s -n -a
+    please = push --force-with-lease
 [help]
 	autocorrect = 10
 [remote "origin"]
@@ -37,3 +38,5 @@
 	ff = only
 [fetch]
 	prune = true
+[init]
+	defaultBranch = master
