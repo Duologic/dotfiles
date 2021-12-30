@@ -16,6 +16,7 @@ set showmatch
 set backspace=2
 set mouse=a
 set ttymouse=sgr " make it work properly in tmux
+set linebreak
 
 " Pathogen
 call pathogen#infect()
@@ -27,7 +28,7 @@ set shiftwidth=4
 set expandtab
 set smarttab
 set autoindent
-set textwidth=120
+set textwidth=90
 
 " Search options
 set hlsearch
@@ -44,8 +45,8 @@ nnoremap g# g#zz
 
 
 " Columns
-set colorcolumn=121
-execute "set colorcolumn=" . join(range(121,800), ',')
+set colorcolumn=90
+"execute "set colorcolumn=" . join(range(121,800), ',')
 
 " Formatting
 set formatoptions=c,q,r,t,b,n
@@ -114,7 +115,7 @@ augroup END
 " vim-terraform configuration
 let g:terraform_align=1
 let g:terraform_fold_sections=1
-let g:terraform_fmt_on_save=0
+let g:terraform_fmt_on_save=1
 autocmd FileType terraform setlocal foldmarker={,}
 
 " syntastic configuration
@@ -144,7 +145,7 @@ let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_go_checkers = ['errcheck', 'go']
 let g:go_fmt_experimental = 1
 let g:go_rename_command = 'gopls'
-let g:go_auto_type_info = 1
+let g:go_auto_type_info = 0
 let g:go_debug_windows = {'vars': 'rightbelow 60vnew', 'stack': 'rightbelow 10new'}
 autocmd FileType go setlocal foldmethod=syntax
 autocmd FileType go set completeopt=longest,menuone
@@ -232,7 +233,6 @@ endfunction
 command! -nargs=1 F call FoldToTheLevel(<f-args>)
 
 " JSONNET
-au FileType jsonnet nmap <leader>b :call JsonnetEval()<cr>
 function! JsonnetEval()
   " check if the file is a tanka file or not
   let output = system("tk tool jpath " . shellescape(expand('%')))
@@ -242,6 +242,43 @@ function! JsonnetEval()
     let output = system("tk eval " . shellescape(expand('%')))
   endif
   vnew
-  setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile ft=json
+  setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile ft=jsonnet
   put! = output
 endfunction
+map <leader>j :call JsonnetEval()<cr> 
+
+let g:lsp_log_verbose = 1
+let g:lsp_log_file = expand('~/vim-lsp.log')
+
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nmap <buffer> gd <plug>(lsp-definition)
+    nmap <buffer> gp <plug>(lsp-peek-definition)
+    nmap <buffer> gs <plug>(lsp-document-symbol-search)
+    nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+    nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> gi <plug>(lsp-implementation)
+    nmap <buffer> gt <plug>(lsp-type-definition)
+    nmap <buffer> <leader>rn <plug>(lsp-rename)
+    nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+    nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+    nmap <buffer> K <plug>(lsp-hover)
+    inoremap <buffer> <expr><c-f> lsp#scroll(+4)
+    inoremap <buffer> <expr><c-d> lsp#scroll(-4)
+
+    let g:go_gopls_enabled = 0
+    let g:jsonnet_fmt_on_save = 0
+    let g:lsp_format_sync_timeout = 1000
+    autocmd! BufWritePre *.rs,*.go,*.jsonnet,*.libsonnet call execute('LspDocumentFormatSync')
+endfunction
+
+augroup lsp_install
+    au!
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"

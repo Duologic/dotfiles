@@ -46,9 +46,6 @@
 [submodule "config/awesome/net_widgets"]
 	path = config/awesome/net_widgets
 	url = git@github.com:pltanton/net_widgets.git
-[submodule "vim/bundle/vim-ripgrep"]
-	path = vim/bundle/vim-ripgrep
-	url = git@github.com:jremmen/vim-ripgrep.git
 [submodule "vim/bundle/vim-markdown"]
 	path = vim/bundle/vim-markdown
 	url = git@github.com:plasticboy/vim-markdown.git
@@ -64,3 +61,24 @@
 [submodule "vim/bundle/vim-rhubarb"]
 	path = vim/bundle/vim-rhubarb
 	url = git@github.com:tpope/vim-rhubarb.git
+[submodule "vim/bundle/vim-cue"]
+	path = vim/bundle/vim-cue
+	url = git@github.com:jjo/vim-cue.git
+[submodule "vim/bundle/vim-lsp"]
+	path = vim/bundle/vim-lsp
+	url = git@github.com:prabirshrestha/vim-lsp.git
+[submodule "vim/bundle/asyncomplete.vim"]
+	path = vim/bundle/asyncomplete.vim
+	url = git@github.com:prabirshrestha/asyncomplete.vim.git
+[submodule "vim/bundle/asyncomplete-lsp.vim"]
+	path = vim/bundle/asyncomplete-lsp.vim
+	url = git@github.com:prabirshrestha/asyncomplete-lsp.vim.git
+[submodule "vim/bundle/vim-lsp-settings"]
+	path = vim/bundle/vim-lsp-settings
+	url = git@github.com:mattn/vim-lsp-settings.git
+[submodule "vim/bundle/fzf.vim"]
+	path = vim/bundle/fzf.vim
+	url = git@github.com:junegunn/fzf.vim.git
+[submodule "zsh/fzf-tab-completion"]
+	path = zsh/fzf-tab-completion
+	url = git@github.com:lincheney/fzf-tab-completion.git
