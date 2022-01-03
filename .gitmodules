@@ -81,7 +81,7 @@
 	url = git@github.com:junegunn/fzf.vim.git
 [submodule "zsh/fzf-tab-completion"]
 	path = zsh/fzf-tab-completion
-	url = git@github.com:lincheney/fzf-tab-completion.git
+	url = git@github.com:lincheney/fzf-tab-completion
 [submodule "config/nvim"]
 	path = config/nvim
 	url = git@github.com:Duologic/nvim-config
