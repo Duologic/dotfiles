@@ -7,14 +7,6 @@ vim/view/*
 vim/viminfo
 vim/viminfo.tmp
 
-# SSH
-ssh/id_*
-ssh/known_hosts
-ssh/authorized_keys
-ssh/master-*
-ssh/*.pem
-ssh/google*
-
 # Links
 links/
 

@@ -1,0 +1,6 @@
+id_*
+known_hosts
+authorized_keys
+master-*
+*.pem
+google*
