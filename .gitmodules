@@ -85,3 +85,6 @@
 [submodule "config/nvim"]
 	path = config/nvim
 	url = git@github.com:Duologic/nvim-config
+[submodule "config/streamdeckd"]
+	path = config/streamdeckd
+	url = git@github.com:Duologic/streamdeckd-config
