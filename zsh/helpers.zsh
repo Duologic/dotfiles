@@ -130,3 +130,24 @@ httpstatuses () { links "https://httpstatuses.com/$1" }
 
 export KUBECTL_EXTERNAL_DIFF=icdiff-kubectl
 alias k9x='kubectx && k9s'
+
+# for `gh`
+export GLAMOUR_STYLE=light
+
+# set up a window for a git project in tmux
+function gitwindow() {
+    NAME=$1
+    PROJ=$2
+
+    tmux new-window -c $PROJ -n $NAME
+    sleep 1
+    tmux split-window -c $PROJ -t $NAME -h
+    tmux split-window -c $PROJ -t $NAME
+    tmux send-keys -t 2 'watchgitstatus'
+    tmux send-keys -t 2 Enter
+    tmux send-keys -t 1 'cd . && clear'
+    tmux send-keys -t 1 Enter
+    tmux send-keys -t 0 'cd . && clear'
+    tmux send-keys -t 0 Enter
+}
+

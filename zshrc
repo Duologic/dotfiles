@@ -45,3 +45,5 @@ export PATH="/usr/local/kubebuilder/bin:$PATH"
 [ -f $HOME/.zsh/setup-dotenv.zsh ] && source $HOME/.zsh/setup-dotenv.zsh
 [ -f $HOME/.zsh/helpers.zsh ] && source $HOME/.zsh/helpers.zsh
 [ -f $HOME/.zsh/auto-start-tmux.zsh ] && source $HOME/.zsh/auto-start-tmux.zsh
+[ -f $HOME/.zsh/setup-history-search.zsh ] &&  source $HOME/.zsh/setup-history-search.zsh
+#[ -f $HOME/.zsh/forgit/forgit.plugin.zsh ] && export FORGIT_NO_ALIASES=false && source $HOME/.zsh/forgit/forgit.plugin.zsh
