@@ -1,0 +1,10 @@
+[Unit]
+Description=Streamdeckd Service
+After=dev-streamdeck\x2dxl.device
+BindsTo=dev-streamdeck\x2dxl.device
+
+[Service]
+ExecStart=/usr/bin/streamdeckd -config /home/duologic/.config/streamdeckd/streamdeck-config.json
+
+[Install]
+WantedBy=default.target
