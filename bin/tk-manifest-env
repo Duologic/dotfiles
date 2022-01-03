@@ -9,7 +9,8 @@ fi
 
 
 ENV=${1}
-KEEP=${2:-0}
+CLUSTER=${2:-""}
+KEEP=${KEEP:-0}
 
 TMPDIR=$(mktemp -d)
 function finish {
@@ -21,7 +22,11 @@ function finish {
 }
 trap finish EXIT
 
-${EXECUTABLE} export "${TMPDIR}" "${1}" \
+SELECTOR=""
+if [ -n "${CLUSTER}" ]; then 
+    SELECTOR="-l cluster_name=${CLUSTER}"
+fi
+${EXECUTABLE} export "${TMPDIR}" "${1}" ${SELECTOR} \
     --recursive \
     --merge \
     --parallel=8 \

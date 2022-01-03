@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#set -euo pipefail
+IFS=$'\n\t'
+
+
+for env in $(tk env list --json "${1}" | jq -r '.[]|.metadata.namespace+","+.metadata.labels.cluster_name'); do
+    TIME=$(/usr/bin/time -f%e "${EXECUTABLE}" eval -e "envs['${env#*,}']" "${env%,*}" 2>&1 >/dev/null)
+    echo "$TIME $env"
+done #| sort -r -n
