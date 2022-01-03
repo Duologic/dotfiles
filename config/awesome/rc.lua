@@ -53,7 +53,7 @@ beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 beautiful.wallpaper = awful.util.get_configuration_dir() .. "background.png"
 
 -- This is used later as the default terminal and editor to run.
-terminal = "/usr/bin/urxvt"
+terminal = "/usr/bin/alacritty"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -219,7 +219,7 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
+            -- mykeyboardlayout,
             micmuted,
             battery_widget({show_current_level=true, notification=true}),
             net_widgets.wireless({interface="wlp0s20f3"}),
@@ -254,6 +254,7 @@ local function move_clients_to_mouse()
         -- naughty.notify({ title=tostring(c) })
         local classes = {
             "urxvt",
+            "alacritty",
             "slack",
             "firefox"
         }
@@ -272,6 +273,9 @@ local function move_clients_to_mouse()
                     awful.client.movetoscreen(c, mouse.screen)
                 end
             end
+        end
+        if string.lower(c.class) == "alacritty" then
+            awful.client.setmaster(c)
         end
         if string.lower(c.class) == "urxvt" then
             awful.client.setmaster(c)
@@ -575,6 +579,7 @@ awful.rules.rules = {
         class = {
           "Arandr",
           "Blueman-manager",
+          "ffplay",
           "Gpick",
           "Kruler",
           "MessageWin",  -- kalarm.
@@ -606,6 +611,7 @@ awful.rules.rules = {
         class = {
           "Arandr",
           "Blueman-manager",
+          "ffplay",
           "Sxiv",
           "zoom"
         },
