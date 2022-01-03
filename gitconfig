@@ -11,7 +11,14 @@
 [merge]
 	tool = vimdiff
 [pager]
+	diff   = delta
+	log    = delta
+	reflog = delta
+	show   = delta
 	difftool = true
+[delta]
+	side-by-side = true
+	light = true
 [diff]
 	tool = icdiff
 [color]
@@ -25,11 +32,11 @@
 	tags = tag --list
 	recent-branches = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 	authors = shortlog -s -n -a
-    please = push --force-with-lease
+	please = push --force-with-lease
+	chk = !git for-each-ref --format='%(refname:short)' refs/heads | fzf | xargs git checkout
+ 	fetch = git fetch --tags
 [help]
 	autocorrect = 10
-[remote "origin"]
-	fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
 [hub]
 	protocol = ssh
 [commit]
