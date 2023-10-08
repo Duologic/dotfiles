@@ -15,5 +15,5 @@ find "$1" -type f | xargs sed -i '/fluxcd.io\/sync-checksum/d'
 warning "ignoring generation: [0-9]+"
 find "$1" "$2" -type f | xargs sed -i '/generation: [0-9]\+/d'
 
-#diff --minimal -u -N $@
-icdiff -r --no-bold --head=5000 --line-numbers --cols $(tput cols) $@
+diff --minimal -u -N $@ | delta
+#icdiff -r --no-bold --head=5000 --line-numbers --cols $(tput cols) $@

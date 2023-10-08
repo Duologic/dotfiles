@@ -58,7 +58,7 @@ set laststatus=2
 set cmdheight=2
 set shortmess=a
 "set statusline=%F%m%r%h%w\ %{fugitive#statusline()}\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 let g:airline_theme='powerlineish'
 let g:airline_powerline_fonts = 1
 
@@ -185,7 +185,6 @@ endfunction
 
 " Opens URL in browser
 nnoremap gx :!xdg-open <cWORD> &<CR><CR>
-nnoremap gk :!k8s-alpha.sh <cWORD> &<CR><CR>
 
 " Highlight all instances of word under cursor, when idle.
 " Useful when studying strange source code.

@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+#if [ "$#" != 1 ]; then
+#  echo "Usage: $(basename "$0") <filename> [keep]"
+#  exit 1
+#fi
+
+function cleanup() {
+    echo "Removing ${DIRNAME}"
+    rm -rf "${DIRNAME}"
+}
+
+DIRNAME="$(mktemp -d)"
+if [ "$2" != "keep" ]; then
+    trap cleanup EXIT
+fi
+
+cd "${DIRNAME}"
+
+jb init
+
+echo "Running from $DIRNAME"
+
+vim "$1"

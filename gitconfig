@@ -9,7 +9,7 @@
 [push]
 	default = current
 [merge]
-	tool = vimdiff
+    tool = nvimdiff2
 [pager]
 	diff   = delta
 	log    = delta
@@ -20,13 +20,13 @@
 	side-by-side = true
 	light = true
 [diff]
-	tool = icdiff
+	tool = nvimdiff
 [color]
 	ui = true
-[difftool]
-	prompt = false
-[difftool "icdiff"]
-	cmd = icdiff --no-bold --head=5000 --line-numbers -L \"$BASE\" -L \"$REMOTE\" \"$LOCAL\" \"$REMOTE\"
+#[difftool]
+#	prompt = true
+#[difftool "icdiff"]
+#	cmd = icdiff --no-bold --head=5000 --line-numbers -L \"$BASE\" -L \"$REMOTE\" \"$LOCAL\" \"$REMOTE\"
 [alias]
 	d = difftool
 	tags = tag --list
@@ -34,7 +34,8 @@
 	authors = shortlog -s -n -a
 	please = push --force-with-lease
 	chk = !git for-each-ref --format='%(refname:short)' refs/heads | fzf | xargs git checkout
- 	fetch = git fetch --tags
+	fetch = git fetch --tags
+	diffc = diff --cached
 [help]
 	autocorrect = 10
 [hub]
@@ -47,3 +48,18 @@
 	prune = true
 [init]
 	defaultBranch = master
+[branch]
+	sort = -committerdate
+[url "https://github.com/"]
+	insteadOf = git@github.com:
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

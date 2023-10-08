@@ -23,7 +23,7 @@ cursor:
     blinking: On
 
 env:
-  TERM: xterm-256color
+  TERM: alacritty # xterm-256color
 
 colors:
   # Default colors

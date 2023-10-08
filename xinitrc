@@ -33,5 +33,10 @@ xss-lock slock &
 # Config variable for opening Java apps in Awesome
 _JAVA_AWT_WM_NONREPARENTING=1; export _JAVA_AWT_WM_NONREPARENTING
 
+systemctl --user start streamdeckd.path
+
+# Turn off middle mouse button on scroll mouse
+xinput set-button-map $(xinput list --id-only "Microsoft Microsoft 3-Button Mouse with IntelliEye(TM)") 1 0 3
+
 # Start Awesome window manager
 exec awesome

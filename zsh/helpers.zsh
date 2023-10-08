@@ -42,9 +42,10 @@ alias sdig='dig +noall +answer'
 function udig() { echo $1 | awk -F/ '{print $3}' | awk -F':' '{print $1}' | xargs dig }
 alias view='vim -R'
 alias xsel='xsel -l $HOME/.local/log/xsel.log'
-alias webshare='python2.7 -c "import SimpleHTTPServer;SimpleHTTPServer.test()"'
+#alias webshare='python2.7 -c "import SimpleHTTPServer;SimpleHTTPServer.test()"'
+alias webshare='docker run -v "$PWD":"/usr/local/apache2/htdocs" -p 0.0.0.0:8080:80 httpd:2.4-alpine'
 alias battery='echo $(cat /sys/class/power_supply/BAT0/capacity)\% $(cat /sys/class/power_supply/BAT0/status)'
-alias watchgitstatus='watch -c git -c color.ui=always status'
+alias watchgitstatus='watch -c git --no-optional-locks -c color.ui=always status --show-stash --ignored=traditional'
 alias maps='telnet mapscii.me'
 
 # special aliases
@@ -113,6 +114,9 @@ decode_k8s_secret (){
   awk -F':' '{ print $2 }' | base64 -D
 }
 
+# set Tmux pane title
+tmux_rename_pane() { printf "\033]2;$1\033\\" }
+
 kubectx () {
   export SPACESHIP_KUBECONTEXT_SHOW=true
   /usr/bin/kubectx $1
@@ -128,26 +132,8 @@ alias watchwttr='watch curl -s "wttr.in\?T\&0"'
 alias watch='watch '
 httpstatuses () { links "https://httpstatuses.com/$1" }
 
-export KUBECTL_EXTERNAL_DIFF=icdiff-kubectl
+#export KUBECTL_EXTERNAL_DIFF=icdiff-kubectl
 alias k9x='kubectx && k9s'
 
 # for `gh`
 export GLAMOUR_STYLE=light
-
-# set up a window for a git project in tmux
-function gitwindow() {
-    NAME=$1
-    PROJ=$2
-
-    tmux new-window -c $PROJ -n $NAME
-    sleep 1
-    tmux split-window -c $PROJ -t $NAME -h
-    tmux split-window -c $PROJ -t $NAME
-    tmux send-keys -t 2 'watchgitstatus'
-    tmux send-keys -t 2 Enter
-    tmux send-keys -t 1 'cd . && clear'
-    tmux send-keys -t 1 Enter
-    tmux send-keys -t 0 'cd . && clear'
-    tmux send-keys -t 0 Enter
-}
-

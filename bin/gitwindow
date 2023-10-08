@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+if [ "$#" != 1 ]; then
+    PROJ=$(fd --glob --type d -H '.git' ~/git | fzf | sed 's/\.git\///')
+else
+    if stat "$1" >/dev/null; then
+        PROJ="$1"
+    elif stat "$HOME/git/$1" >/dev/null; then
+        PROJ="$HOME/git/$1"
+    else
+        echo "$1 not found"
+        exit 1
+    fi
+fi
+
+NAME="$(basename "$PROJ")"
+
+tmux new-window -c "$PROJ" -n "$NAME"
+sleep 1
+tmux split-window -c "$PROJ" -t "$NAME" -h
+tmux split-window -c "$PROJ" -t "$NAME"
+tmux send-keys -t 2 "watchgitstatus"
+tmux send-keys -t 2 Enter
+tmux select-pane -t 0

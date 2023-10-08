@@ -1,2 +1,1 @@
-#!/bin/sh
-/usr/bin/firefox --profile /home/duologic/.mozilla/firefox/kpuh1x69.Slack --ssb https://open.spotify.com
+GDK_DPI_SCALE=1.2 /usr/bin/spotify
