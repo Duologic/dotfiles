@@ -7,6 +7,14 @@ else
         PROJ="$1"
     elif stat "$HOME/git/$1" >/dev/null; then
         PROJ="$HOME/git/$1"
+    elif stat "$HOME/git/grafana/$1" >/dev/null; then
+        PROJ="$HOME/git/grafana/$1"
+    elif stat "$HOME/git/crdsonnet/$1" >/dev/null; then
+        PROJ="$HOME/git/crdsonnet/$1"
+    elif stat "$HOME/git/Duologic/$1" >/dev/null; then
+        PROJ="$HOME/git/Duologic/$1"
+    elif stat "$HOME/git/jsonnet-libs/$1" >/dev/null; then
+        PROJ="$HOME/git/jsonnet-libs/$1"
     else
         echo "$1 not found"
         exit 1
@@ -19,6 +27,6 @@ tmux new-window -c "$PROJ" -n "$NAME"
 sleep 1
 tmux split-window -c "$PROJ" -t "$NAME" -h
 tmux split-window -c "$PROJ" -t "$NAME"
-tmux send-keys -t 2 "watchgitstatus"
+tmux send-keys -t 2 "git watchstatus"
 tmux send-keys -t 2 Enter
 tmux select-pane -t 0

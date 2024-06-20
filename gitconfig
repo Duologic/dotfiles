@@ -20,22 +20,29 @@
 	side-by-side = true
 	light = true
 [diff]
-	tool = nvimdiff
+	tool = difftastic
 [color]
 	ui = true
-#[difftool]
-#	prompt = true
-#[difftool "icdiff"]
-#	cmd = icdiff --no-bold --head=5000 --line-numbers -L \"$BASE\" -L \"$REMOTE\" \"$LOCAL\" \"$REMOTE\"
+[difftool]
+	prompt = false
+[difftool "difftastic"]
+    cmd = /home/duologic/git/Wilfred/difftastic/target/debug/difft --syntax-highlight=off --background=light "$LOCAL" "$REMOTE"
 [alias]
 	d = difftool
 	tags = tag --list
-	recent-branches = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
-	authors = shortlog -s -n -a
+	recent-branches = !git for-each-ref refs/heads/ --sort=-committerdate --color=always --format='%(HEAD) %(color:red)%(objectname:short)%(color:reset)%09%(color:green)%(committerdate:relative)%(color:reset)%09%(upstream:track)%09%(color:yellow)%(refname:short)%(color:reset)%09%(authorname)%09%(contents:subject)' | column -t -T 6 -s'\t'
+	delete-branches-without-tracking = !git branch --format='%(refname:short) %(upstream:track)' | grep gone | awk -F ' ' '{ print $1 }' | xargs git branch -D
+	 authors = shortlog -s -n -a
 	please = push --force-with-lease
-	chk = !git for-each-ref --format='%(refname:short)' refs/heads | fzf | xargs git checkout
-	fetch = git fetch --tags
+    #chk = !git for-each-ref --format='%(refname:short)' refs/heads | fzf | xargs git checkout
+	fetch = fetch --tags
 	diffc = diff --cached
+	defaultbranch = branch -l main master --format '%(refname:short)' --sort=v:refname
+	diffm = !git diff $(git defaultbranch)..HEAD
+	logm = !git log --oneline $(git defaultbranch)..HEAD
+	remain = !git fetch origin $(git defaultbranch) && git rebase origin/$(git defaultbranch)
+	cmain = !git checkout $(git defaultbranch)
+	watchstatus = !watch -c git --no-optional-locks -c color.ui=always status --show-stash --ignored=traditional
 [help]
 	autocorrect = 10
 [hub]

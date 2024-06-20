@@ -12,7 +12,7 @@
     'use strict';
 
     var waitForThatFrickingButton = setInterval(function() {
-        let xpath = "//button[text()='enable desktop notifications']";
+        let xpath = "//button[aria-label='Dismiss']";
         let button = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         if(button) {
             button.click();
@@ -20,4 +20,3 @@
         }
     }, 500)
 })();
-

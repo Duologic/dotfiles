@@ -1,0 +1,14 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+for branch in $(git branch --no-merged); do 
+    branch=$(echo $branch|sed -e 's/^[ \t]*//')
+    echo "Removing ${branch}"
+    git log -1 ${branch}
+    read -r -p "Are you sure? " yn
+    if [[ $yn =~ ^[Yy]$ ]]; then
+        git branch -D ${branch}
+    fi
+    echo
+done

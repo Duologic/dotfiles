@@ -88,3 +88,6 @@
 [submodule "config/streamdeckd"]
 	path = config/streamdeckd
 	url = git@github.com:Duologic/streamdeckd-config
+[submodule "zsh/spaceship-vi-mode"]
+	path = zsh/spaceship-vi-mode
+	url = https://github.com/spaceship-prompt/spaceship-vi-mode.git

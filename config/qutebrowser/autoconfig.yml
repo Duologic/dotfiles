@@ -20,8 +20,9 @@ settings:
   content.headers.accept_language:
     global: en-US;en;q=0.9
   content.headers.user_agent:
-    app.slack.com: Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like
-      Gecko) {upstream_browser_key}/118.0.5615.213 Safari/{webkit_version}
+    global: Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko)
+      {qt_key}/{qt_version} {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version}
+      CrOS
   content.media.audio_capture:
     https://app.slack.com: true
     https://meet.google.com: true

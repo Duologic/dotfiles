@@ -22,7 +22,7 @@ if [ -f $HOME/.zsh/fzf-tab-completion/zsh/fzf-zsh-completion.sh ]; then
     source $HOME/.zsh/fzf-tab-completion/zsh/fzf-zsh-completion.sh
     bindkey '^I' fzf_completion
     zstyle ':completion:*' fzf-search-display true
-    zstyle ':completion::*:(ls|cd|cat|bat|vim)::*' fzf-completion-opts --preview="$script"
+    zstyle ':completion::*:(l|ll|ls|cd|cat|bat|vim)::*' fzf-completion-opts --preview="$script"
     zstyle ':completion::*:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-completion-opts --preview='eval eval echo {1}'
     zstyle ':completion::*:git::git,stash,pop,*' fzf-completion-opts --preview="eval git stash show --color=always -p {+1}"
 fi

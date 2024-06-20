@@ -54,7 +54,7 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_themes_dir() .. 'default/theme.lua')
-beautiful.wallpaper = awful.util.get_configuration_dir() .. 'lgtm_background_4k.png'
+beautiful.wallpaper = awful.util.get_configuration_dir() .. 'trip.jpg'
 
 -- This is used later as the default terminal and editor to run.
 terminal = '/usr/bin/alacritty'
@@ -321,7 +321,8 @@ globalkeys = gears.table.join(
         { description = 'F13 terminal', group = 'shortcuts' }),
     awful.key({}, '#192', function() awful.util.spawn('qutebrowser') end,
         { description = 'F14 qutebrowser', group = 'shortcuts' }),
-    --awful.key({ }, "#193", function() awful.util.spawn("slack") end,            {description="F15 slack",             group="shortcuts"}),
+    awful.key({}, '#193', function() awful.util.spawn('alacritty --class cotp -e cotp') end,
+        { description = 'F15 cotp', group = 'shortcuts' }),
     awful.key({}, '#194', function() awful.util.spawn('volumecontrol') end,
         { description = 'F16 pavucontrol', group = 'shortcuts' }),
     awful.key({}, '#195', function() awful.util.spawn('spotify') end,
@@ -595,6 +596,7 @@ awful.rules.rules = {
                 'ffplay',
                 'Gpick',
                 'Kruler',
+                'cotp',
                 'MessageWin',  -- kalarm.
                 'Sxiv',
                 'Tor Browser', -- Needs a fixed window size to avoid fingerprinting by screen size.
@@ -616,6 +618,17 @@ awful.rules.rules = {
             }
         },
         properties = { floating = true }
+    },
+    {
+        rule_any = {
+            class = {
+                'cotp',
+            },
+        },
+        properties = {
+            floating = true,
+            placement = awful.placement.centered,
+        }
     },
 
     -- Add titlebars to normal clients and dialogs

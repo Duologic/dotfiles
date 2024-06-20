@@ -1,0 +1,13 @@
+plugin:
+  # List all the resources managed by a Composite Resource
+  kube-lineage:
+    shortCut: Ctrl-X
+    confirm: false
+    description: "Crossplane trace"
+    scopes:
+      - all
+    command: bash
+    background: false
+    args:
+      - -c
+      - "kubectl config set-context $CONTEXT && crank beta trace -n $NAMESPACE $RESOURCE_NAME $NAME | less"
