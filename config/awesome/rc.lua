@@ -311,16 +311,19 @@ globalkeys = gears.table.join(
     awful.key({}, 'XF86AudioLowerVolume', function() awful.util.spawn('pamixer -d 5') end),
     awful.key({}, 'XF86AudioRaiseVolume', function() awful.util.spawn('pamixer -u -i 5') end),
     awful.key({}, 'XF86AudioMicMute', mute),
-    -- fn+F3 on Apple Keyboard
-    -- awful.key({}, 'XF86LaunchA', function() awful.util.spawn('setxkbmap -layout us -variant altgr-intl') end),
     awful.key({}, 'XF86LaunchA', move_clients_to_mouse, { description = 'F3 shuffle clients', group = 'shortcuts' }),
-    -- fn+F4 on Apple Keyboard
-    -- awful.key({}, 'XF86LaunchB', mute),
     -- fn+F4 on Keychron
     awful.key({}, '#248', function() awful.util.spawn('autorandr docked') end,
         { description = 'F4 autorandr docked', group = 'shortcuts' }),
     awful.key({}, 'XF86MonBrightnessUp', function() awful.util.spawn('xbacklight -inc 5') end),
     awful.key({}, 'XF86MonBrightnessDown', function() awful.util.spawn('xbacklight -dec 5') end),
+    awful.key({}, 'Insert', function() awful.util.spawn('slock') end,
+         { description = 'slock', group = 'shortcuts' }), -- insert key
+
+    -- fn+F3 on Apple Keyboard
+    -- awful.key({}, 'XF86LaunchA', function() awful.util.spawn('setxkbmap -layout us -variant altgr-intl') end),
+    -- fn+F4 on Apple Keyboard
+    -- awful.key({}, 'XF86LaunchB', mute),
     -- fn+F5 on Carbon X keyboard does not map to XF86 key
     -- awful.key({}, '#232', function() awful.util.spawn('xbacklight -dec 5') end),
     -- awful.key({}, '#169', function() awful.util.spawn('slock') end,

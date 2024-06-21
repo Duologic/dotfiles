@@ -15,25 +15,25 @@ xset -dpms
 xset s off
 
 # Scale X resources
-[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
+[[ -f ~/.config/X11/Xresources ]] && xrdb -merge -I$HOME ~/.config/X11/Xresources
 
 # Configure keyboard and mouse
 setxkbmap -layout us -variant altgr-intl
-[ -r $HOME/.Xmodmap ] && xmodmap $HOME/.Xmodmap
+[ -r $HOME/.config/X11/Xmodmap ] && xmodmap $HOME/.config/X11/Xmodmap
 xinput set-prop 11 316 1
 
 # Sync clipboards
-autocutsel -fork
+#autocutsel -fork
 #autocutsel -selection PRIMARY -fork
-autocutsel -selection CLIPBOARD -fork
+#autocutsel -selection CLIPBOARD -fork
 
 # Use slock to lock screen
 xss-lock slock &
 
 # Config variable for opening Java apps in Awesome
-_JAVA_AWT_WM_NONREPARENTING=1; export _JAVA_AWT_WM_NONREPARENTING
+#_JAVA_AWT_WM_NONREPARENTING=1; export _JAVA_AWT_WM_NONREPARENTING
 
-systemctl --user start streamdeckd.path
+#systemctl --user start streamdeckd.path
 
 # Turn off middle mouse button on scroll mouse
 xinput set-button-map $(xinput list --id-only "Microsoft Microsoft 3-Button Mouse with IntelliEye(TM)") 1 0 3
