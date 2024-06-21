@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+while read -r _ _ remote_ref _
+do
+  if [[ "$remote_ref" = "refs/heads/master" ]]; then
+    echo
+    echo "$(tput setaf 1)Oof, you were about to push to master, luckily we have this pre-push hook!$(tput sgr 0)"
+    echo
+    exit 1
+  fi
+  if [[ "$remote_ref" = "refs/heads/main" ]]; then
+    echo
+    echo "$(tput setaf 1)Oof, you were about to push to main, luckily we have this pre-push hook!$(tput sgr 0)"
+    echo
+    exit 1
+  fi
+done
+
+exit 0
