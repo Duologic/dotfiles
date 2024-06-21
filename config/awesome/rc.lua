@@ -256,6 +256,9 @@ end
 
 local function move_clients_to_mouse()
     for i, c in ipairs(client.get()) do
+        if c.class == nil then
+            goto continue
+        end
         -- naughty.notify({ title=tostring(c) })
         local classes = {
             'urxvt',
@@ -286,6 +289,7 @@ local function move_clients_to_mouse()
         if string.lower(c.class) == 'urxvt' then
             awful.client.setmaster(c)
         end
+        ::continue::
     end
 end
 
@@ -299,7 +303,7 @@ globalkeys = gears.table.join(
         { description = 'view next', group = 'tag' }),
     awful.key({ modkey, }, 'Escape', awful.tag.history.restore,
         { description = 'go back', group = 'tag' }),
-    awful.key({}, 'XF86Display', function() awful.util.spawn('autorandr -c') end),
+    -- awful.key({}, 'XF86Display', function() awful.util.spawn('autorandr -c') end),
     awful.key({}, 'XF86AudioPrev', function() awful.util.spawn('playerctl previous') end),
     awful.key({}, 'XF86AudioPlay', function() awful.util.spawn('playerctl play-pause') end),
     awful.key({}, 'XF86AudioNext', function() awful.util.spawn('playerctl next') end),
@@ -308,28 +312,34 @@ globalkeys = gears.table.join(
     awful.key({}, 'XF86AudioRaiseVolume', function() awful.util.spawn('pamixer -u -i 5') end),
     awful.key({}, 'XF86AudioMicMute', mute),
     -- fn+F3 on Apple Keyboard
-    awful.key({}, 'XF86LaunchA', function() awful.util.spawn('setxkbmap -layout us -variant altgr-intl') end),
+    -- awful.key({}, 'XF86LaunchA', function() awful.util.spawn('setxkbmap -layout us -variant altgr-intl') end),
+    awful.key({}, 'XF86LaunchA', move_clients_to_mouse, { description = 'F3 shuffle clients', group = 'shortcuts' }),
     -- fn+F4 on Apple Keyboard
-    awful.key({}, 'XF86LaunchB', mute),
+    -- awful.key({}, 'XF86LaunchB', mute),
+    -- fn+F4 on Keychron
+    awful.key({}, '#248', function() awful.util.spawn('autorandr docked') end,
+        { description = 'F4 autorandr docked', group = 'shortcuts' }),
     awful.key({}, 'XF86MonBrightnessUp', function() awful.util.spawn('xbacklight -inc 5') end),
     awful.key({}, 'XF86MonBrightnessDown', function() awful.util.spawn('xbacklight -dec 5') end),
     -- fn+F5 on Carbon X keyboard does not map to XF86 key
-    awful.key({}, '#232', function() awful.util.spawn('xbacklight -dec 5') end),
-    awful.key({}, '#169', function() awful.util.spawn('slock') end,
-        { description = 'slock', group = 'shortcuts' }), -- eject key
-    awful.key({}, '#191', function() awful.util.spawn(terminal) end,
-        { description = 'F13 terminal', group = 'shortcuts' }),
-    awful.key({}, '#192', function() awful.util.spawn('qutebrowser') end,
-        { description = 'F14 qutebrowser', group = 'shortcuts' }),
-    awful.key({}, '#193', function() awful.util.spawn('alacritty --class cotp -e cotp') end,
-        { description = 'F15 cotp', group = 'shortcuts' }),
-    awful.key({}, '#194', function() awful.util.spawn('volumecontrol') end,
-        { description = 'F16 pavucontrol', group = 'shortcuts' }),
-    awful.key({}, '#195', function() awful.util.spawn('spotify') end,
-        { description = 'F17 spotify', group = 'shortcuts' }),
-    awful.key({}, '#196', function() awful.util.spawn('autorandr docked') end,
-        { description = 'F18 autorandr docked', group = 'shortcuts' }),
-    awful.key({}, '#197', move_clients_to_mouse, { description = 'F19 shuffle clients', group = 'shortcuts' }),
+    -- awful.key({}, '#232', function() awful.util.spawn('xbacklight -dec 5') end),
+    -- awful.key({}, '#169', function() awful.util.spawn('slock') end,
+    --     { description = 'slock', group = 'shortcuts' }), -- eject key
+    -- awful.key({}, '#191', function() awful.util.spawn(terminal) end,
+    --     { description = 'F13 terminal', group = 'shortcuts' }),
+    -- awful.key({}, '#192', function() awful.util.spawn('qutebrowser') end,
+    --     { description = 'F14 qutebrowser', group = 'shortcuts' }),
+    -- awful.key({}, '#193', function() awful.util.spawn('alacritty --class cotp -e cotp') end,
+    --     { description = 'F15 cotp', group = 'shortcuts' }),
+    -- awful.key({}, '#194', function() awful.util.spawn('volumecontrol') end,
+    --     { description = 'F16 pavucontrol', group = 'shortcuts' }),
+    -- awful.key({}, '#195', function() awful.util.spawn('spotify') end,
+    --     { description = 'F17 spotify', group = 'shortcuts' }),
+    -- fn+F18 on Apple Keyboard
+    -- awful.key({}, '#196', function() awful.util.spawn('autorandr docked') end,
+    --     { description = 'F18 autorandr docked', group = 'shortcuts' }),
+    -- fn+F19 on Apple Keyboard
+    -- awful.key({}, '#197', move_clients_to_mouse, { description = 'F19 shuffle clients', group = 'shortcuts' }),
     awful.key({ modkey, }, 'j',
         function()
             awful.client.focus.byidx(1)
