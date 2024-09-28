@@ -17,7 +17,7 @@ function rgvim() {
   filename=$(echo $INPUT|awk -F':' '{ print $1 }')
   linenumb=$(echo $INPUT|awk -F':' '{ print $2 }')
 
-  vim +$linenumb $filename
+  nvim +$linenumb $filename
 }
 
 # vimln file.name:line:col
@@ -28,7 +28,7 @@ function vimln() {
   linenumb=$(echo $INPUT|awk -F':' '{ print $2 }')
   colnumb=$(echo $INPUT|awk -F':' '{ print $3 }')
 
-  vim -c $linenumb'norm '$colnumb'|' $filename
+  nvim -c $linenumb'norm '$colnumb'|' $filename
 }
 
 ## other
@@ -55,13 +55,8 @@ tmux_rename_pane() { printf "\033]2;$1\033\\" }
 
 # k8s
 alias k9x='kubectx && k9s'
-kubectx () {
-  export SPACESHIP_KUBECONTEXT_SHOW=true
-  /usr/bin/kubectx $1
-}
 k3d_set_context () {
   export KUBECONFIG="$(k3d get-kubeconfig --name=$1):$HOME/.kube/config"
-  export SPACESHIP_KUBECONTEXT_SHOW=true
   kubectx $1
 }
 
