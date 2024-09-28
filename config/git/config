@@ -27,7 +27,7 @@
 [difftool]
 	prompt = false
 [difftool "difftastic"]
-    cmd = /home/duologic/git/Wilfred/difftastic/target/debug/difft --syntax-highlight=off --background=light "$LOCAL" "$REMOTE"
+    cmd = /home/duologic/git/Duologic/difftastic/target/debug/difft --syntax-highlight=off --background=light "$LOCAL" "$REMOTE"
 [alias]
 	d = difftool
 	tags = tag --list
@@ -44,6 +44,7 @@
 	remain = !git fetch origin $(git defaultbranch) && git rebase origin/$(git defaultbranch)
 	cmain = !git checkout $(git defaultbranch)
 	watchstatus = !watch -c git --no-optional-locks -c color.ui=always status --show-stash --ignored=traditional
+    pr = !gh pr view -w
 [help]
 	autocorrect = 10
 [hub]

@@ -1,0 +1,1 @@
+/usr/bin/scrot -F '/home/duologic/scr/%Y-%m-%d_%H%M%S_$wx$h_scrot.png' "$@"

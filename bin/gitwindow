@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 if [ "$#" != 1 ]; then
-    PROJ=$(fd --glob --type d -H '.git' ~/git | fzf | sed 's/\.git\///')
+    PROJ=$(fd --glob --type d -H '.git' $HOME/git | sed 's;'$HOME'/git/;;' | sed 's/\/\.git\///' | fzf)
+    PROJ="$HOME/git/$PROJ"
 else
     if stat "$1" >/dev/null; then
         PROJ="$1"
-    elif stat "$HOME/git/$1" >/dev/null; then
-        PROJ="$HOME/git/$1"
     elif stat "$HOME/git/grafana/$1" >/dev/null; then
         PROJ="$HOME/git/grafana/$1"
     elif stat "$HOME/git/crdsonnet/$1" >/dev/null; then
@@ -15,6 +15,8 @@ else
         PROJ="$HOME/git/Duologic/$1"
     elif stat "$HOME/git/jsonnet-libs/$1" >/dev/null; then
         PROJ="$HOME/git/jsonnet-libs/$1"
+    elif stat "$HOME/git/$1" >/dev/null; then
+        PROJ="$HOME/git/$1"
     else
         echo "$1 not found"
         exit 1

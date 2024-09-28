@@ -231,7 +231,7 @@ awful.screen.connect_for_each_screen(function(s)
             -- mykeyboardlayout,
             micmuted,
             battery_widget({ show_current_level = true, notification = true }),
-            net_widgets.wireless({ interface = 'wlp0s20f3' }),
+            net_widgets.wireless({ interface = 'wlp4s0' }),
             wibox.widget.systray(),
             localtextclock,
             utctextclock,
@@ -316,16 +316,16 @@ globalkeys = gears.table.join(
     awful.key({}, '#248', function() awful.util.spawn('autorandr docked') end,
         { description = 'F4 autorandr docked', group = 'shortcuts' }),
     awful.key({}, 'XF86MonBrightnessUp', function() awful.util.spawn('xbacklight -inc 5') end),
-    awful.key({}, 'XF86MonBrightnessDown', function() awful.util.spawn('xbacklight -dec 5') end),
+    --awful.key({}, 'XF86MonBrightnessDown', function() awful.util.spawn('xbacklight -dec 5') end),
+    -- fn+F5 does not always map to XF86 key properly
+    awful.key({}, '#232', function() awful.util.spawn('xbacklight -dec 5') end),
     awful.key({}, 'Insert', function() awful.util.spawn('slock') end,
-         { description = 'slock', group = 'shortcuts' }), -- insert key
+        { description = 'slock', group = 'shortcuts' }), -- insert key
 
     -- fn+F3 on Apple Keyboard
     -- awful.key({}, 'XF86LaunchA', function() awful.util.spawn('setxkbmap -layout us -variant altgr-intl') end),
     -- fn+F4 on Apple Keyboard
     -- awful.key({}, 'XF86LaunchB', mute),
-    -- fn+F5 on Carbon X keyboard does not map to XF86 key
-    -- awful.key({}, '#232', function() awful.util.spawn('xbacklight -dec 5') end),
     -- awful.key({}, '#169', function() awful.util.spawn('slock') end,
     --     { description = 'slock', group = 'shortcuts' }), -- eject key
     -- awful.key({}, '#191', function() awful.util.spawn(terminal) end,
@@ -607,7 +607,6 @@ awful.rules.rules = {
                 'Arandr',
                 'Blueman-manager',
                 'ffplay',
-                'Gpick',
                 'Kruler',
                 'cotp',
                 'MessageWin',  -- kalarm.
@@ -630,7 +629,10 @@ awful.rules.rules = {
                 'pop-up',        -- e.g. Google Chrome's (detached) Developer Tools.
             }
         },
-        properties = { floating = true }
+        properties = {
+            titlebars_enabled = true,
+            floating = true,
+        }
     },
     {
         rule_any = {
@@ -673,6 +675,20 @@ awful.rules.rules = {
             focusable = false,
             floating = true,
             titlebars_enabled = true
+        }
+    },
+
+    -- Colorpicker keyboard
+    {
+        rule_any = {
+            class = {
+                'Gpick',
+            },
+        },
+        properties = {
+            floating = true,
+            titlebars_enabled = true,
+            ontop = true,
         }
     },
 

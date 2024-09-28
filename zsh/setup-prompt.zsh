@@ -38,6 +38,7 @@ autoload -Uz promptinit && promptinit
 [ -f $HOME/.zsh/spaceship-prompt/spaceship.zsh ] && source $HOME/.zsh/spaceship-prompt/spaceship.zsh
 [ -f $HOME/.zsh/spaceship-vi-mode/spaceship-vi-mode.plugin.zsh ] && source $HOME/.zsh/spaceship-vi-mode/spaceship-vi-mode.plugin.zsh
 spaceship add --before char vi_mode
+eval spaceship_vi_mode_enable
 
 export BAT_THEME="Solarized (light)"
 

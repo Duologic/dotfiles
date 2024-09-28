@@ -19,6 +19,7 @@ xset s off
 
 # Configure keyboard and mouse
 setxkbmap -layout us -variant altgr-intl
+setxkbmap -option caps:escape
 [ -r $HOME/.config/X11/Xmodmap ] && xmodmap $HOME/.config/X11/Xmodmap
 xinput set-prop 11 316 1
 
