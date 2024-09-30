@@ -1,4 +1,3 @@
-
 [ -d $HOME/.zsh/zsh-completions ] && fpath=($HOME/.zsh/zsh-completions $fpath)
 [ -d /usr/local/share/zsh-completions ] && fpath=(/usr/local/share/zsh-completions $fpath)
 
@@ -16,15 +15,30 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 [ -f $HOME/.zsh/auto-complete-terraform.zsh ] && source $HOME/.zsh/auto-complete-terraform.zsh
 [ -f $HOME/.zsh/auto-complete-tanka.zsh ] && source $HOME/.zsh/auto-complete-tanka.zsh
 
-if [ -f $HOME/.zsh/fzf-tab-completion/zsh/fzf-zsh-completion.sh ]; then
-    local script='if eval test -f {1}; then eval bat --style snip --color always -r0:25 {1}; else eval tree -C {1}; fi'
+if [ -f $HOME/.zsh/fzf-tab/fzf-tab.plugin.zsh ]; then
+    source $HOME/.zsh/fzf-tab/fzf-tab.plugin.zsh
 
-    source $HOME/.zsh/fzf-tab-completion/zsh/fzf-zsh-completion.sh
-    bindkey '^I' fzf_completion
-    zstyle ':completion:*' fzf-search-display true
-    zstyle ':completion::*:(l|ll|ls|cd|cat|bat|vim)::*' fzf-completion-opts --preview="$script"
-    zstyle ':completion::*:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-completion-opts --preview='eval eval echo {1}'
-    zstyle ':completion::*:git::git,stash,pop,*' fzf-completion-opts --preview="eval git stash show --color=always -p {+1}"
+    zstyle ':fzf-tab:*' default-color $'\033[30m'
+    zstyle ':fzf-tab:*' fzf-flags --color=light
+
+    export FZF_PREVIEW_LINES=25
+    local script='
+    if [ -f "$realpath" ]; then
+        bat --style snip --color always -r0:25 $realpath
+    else
+        tree -C $realpath
+    fi'
+    # plain text files/directories
+    zstyle ':fzf-tab:complete:(l|ll|ls|cd|cat|bat|vim):*' fzf-preview $script
+    # git
+    zstyle ':fzf-tab:complete:git-stash-pop:*' fzf-preview 'git stash show --color=always -p $word'
+    # env variables
+    zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}'
+    # systemctl
+    zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
+    # arguments and options
+    zstyle ':fzf-tab:complete:*:options' fzf-preview
+    zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
 fi
 
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh

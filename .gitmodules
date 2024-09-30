@@ -79,9 +79,6 @@
 [submodule "vim/bundle/fzf.vim"]
 	path = vim/bundle/fzf.vim
 	url = git@github.com:junegunn/fzf.vim.git
-[submodule "zsh/fzf-tab-completion"]
-	path = zsh/fzf-tab-completion
-	url = git@github.com:lincheney/fzf-tab-completion
 [submodule "config/nvim"]
 	path = config/nvim
 	url = git@github.com:Duologic/nvim-config
@@ -91,3 +88,6 @@
 [submodule "zsh/spaceship-vi-mode"]
 	path = zsh/spaceship-vi-mode
 	url = https://github.com/spaceship-prompt/spaceship-vi-mode.git
+[submodule "zsh/fzf-tab"]
+	path = zsh/fzf-tab
+	url = https://github.com/Aloxaf/fzf-tab
